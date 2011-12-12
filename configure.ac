@@ -2,9 +2,9 @@
 AC_PREREQ(2.52)
 
 dnl the mate-python version number
-m4_define(mate_python_desktop_major_version, 2011)
-m4_define(mate_python_desktop_minor_version, 12)
-m4_define(mate_python_desktop_micro_version, 01)
+m4_define(mate_python_desktop_major_version, 1)
+m4_define(mate_python_desktop_minor_version, 1)
+m4_define(mate_python_desktop_micro_version, 0)
 m4_define(mate_python_desktop_version, mate_python_desktop_major_version.mate_python_desktop_minor_version.mate_python_desktop_micro_version)
 
 dnl required versions of other packages
@@ -14,27 +14,27 @@ m4_define(pygtk_required_micro_version, 3)
 m4_define(pygtk_required_version, pygtk_required_major_version.pygtk_required_minor_version.pygtk_required_micro_version)
 m4_define(glib_required_version,              2.6.0)
 m4_define(gtk_required_version,               2.4.0)
-m4_define(mate_python_required_version,      2.10.0)
-m4_define(libmatepanelapplet_required_version,    2.13.4)
-m4_define(libmateprint_required_version,     2.2.0)
-m4_define(libmateprintui_required_version,   2.2.0)
+m4_define(mate_python_required_version,      1.1.0)
+m4_define(libmatepanelapplet_required_version,    1.1.0)
+m4_define(libmateprint_required_version,     1.1.0)
+m4_define(libmateprintui_required_version,   1.1.0)
 m4_define(gtksourceview_required_version,     1.1.90)
 m4_define(wnck_required_version,              2.19.3)
 m4_define(libgtop_required_version,           2.13.0)
-m4_define(libcaja_burn_required_version,  2.15.3)
+m4_define(libcaja_burn_required_version,  1.1.0)
 m4_define(libbrasero_media_required_version,  2.29)
 m4_define(mediaprofiles_required_version,     2.10.0)
-m4_define(mateconf_required_version,             2.10.0)
-m4_define(marco_required_version,          2.21.5)
+m4_define(mateconf_required_version,             1.1.0)
+m4_define(marco_required_version,          1.1.0)
 m4_define(rsvg_required_version,              2.13.93)
-m4_define(matekeyring_required_version,      0.5.0)
-m4_define(matedesktop_required_version,      2.10.0)
+m4_define(matekeyring_required_version,      1.1.0)
+m4_define(matedesktop_required_version,      1.1.0)
 m4_define(totem_required_version,             1.4.0)
 m4_define(libecal_required_version,           1.4.0)
 m4_define(libebook_required_version,          1.4.0)
 
 AC_INIT(mate-python-desktop, mate_python_desktop_version,
-        [http://bugzilla.mate.org/enter_bug.cgi?product=mate-python])
+        [http://www.mate-desktop.org/])
 dnl AC_CONFIG_SRCDIR([mate/uimodule.c])
 AM_CONFIG_HEADER(config.h)
 
@@ -191,7 +191,7 @@ fi
 
 if [ $build_mateprint = true ]; then
    AC_MSG_CHECKING([for libmateprint 2.8 API])
-   if $PKG_CONFIG --modversion "libmateprint-2.2 >= 2.7.2" > /dev/null 2>&1; then
+   if $PKG_CONFIG --modversion "libmateprint-2.2 >= 1.1.0" > /dev/null 2>&1; then
       AC_MSG_RESULT([found])
       PYMATEPRINT_DEFS="-DHAVE_MATEPRINT28";
    else
@@ -361,7 +361,7 @@ if test -n "$export_dynamic"; then
   MATEKEYRING_LIBS=`echo $MATEKEYRING_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
-if $PKG_CONFIG --exists "mate-keyring-1 >= 2.20.1"; then
+if $PKG_CONFIG --exists "mate-keyring-1 >= 1.1.0"; then
   AC_DEFINE(HAVE_KEYRING_2_20_1, 1, [defined if matekeyring 2.20.1 API is found])
 fi
 
