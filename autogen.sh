@@ -29,8 +29,8 @@ mate_datadir=
 ifs_save="$IFS"; IFS=":"
 for dir in $PATH ; do
   test -z "$dir" && dir=.
-  if test -f $dir/mate-autogen.sh ; then
-    mate_autogen="$dir/mate-autogen.sh"
+  if test -f $dir/mate-autogen ; then
+    mate_autogen="$dir/mate-autogen"
     mate_datadir=`echo $dir | sed -e 's,/bin$,/share,'`
     break
   fi
