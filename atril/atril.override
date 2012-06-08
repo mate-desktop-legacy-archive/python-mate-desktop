@@ -10,8 +10,8 @@ headers
 #include <pygtk/pygtk.h>
 #include <pycairo/pycairo.h>
 
-#include <evince-document.h>
-#include <evince-view.h>
+#include <atril-document.h>
+#include <atril-view.h>
 
 extern Pycairo_CAPI_t *Pycairo_CAPI;
 

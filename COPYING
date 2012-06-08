@@ -18,7 +18,5 @@ marco		GPL
 cajaburn		GPL
 rsvg			LGPL
 totem.plparser		LGPL
-wnck			LGPL
-evince                  LGPL
-braseromedia            GPL
-braseroburn             GPL
+matewnck			LGPL
+atril                  LGPL

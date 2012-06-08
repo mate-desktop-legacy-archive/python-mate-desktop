@@ -131,7 +131,7 @@ AC_ARG_ENABLE([gtk-doc],
 AM_CONDITIONAL(BUILD_DOCS, [test "$enable_gtk_doc" = "yes"])
 
 dnl default bindings to build:
-default_bindings_on="applet mateprint mateprintui gtksourceview matewnck totem_plparser gtop cajaburn mediaprofiles rsvg matekeyring matedesktop bugbuddy marco evince"
+default_bindings_on="applet mateprint mateprintui gtksourceview matewnck totem_plparser gtop cajaburn mediaprofiles rsvg matekeyring matedesktop bugbuddy marco atril"
 default_bindings_off="marco"
 default_bindings_all="$default_bindings_on $default_bindings_off"
 
@@ -364,17 +364,17 @@ if $build_bugbuddy; then
 fi
 AM_CONDITIONAL(BUILD_BUGBUDDY, $build_bugbuddy)
 
-dnl should we build the evince module
-AC_ARG_BINDING([evince],[YES])
-if $build_evince; then
-    PKG_CHECK_MODULES(EVINCE, [evince-document-2.32 evince-view-2.32],
-      build_evince=true,
-      build_evince=false)
+dnl should we build the atril module
+AC_ARG_BINDING([atril],[YES])
+if $build_atril; then
+    PKG_CHECK_MODULES(ATRIL, [atril-document-2.32 atril-view-2.32],
+      build_atril=true,
+      build_atril=false)
     if test -n "$export_dynamic"; then
-      EVINCE_LIBS=`echo $EVINCE_LIBS | sed -e "s/$export_dynamic//"`
+      ATRIL_LIBS=`echo $ATRIL_LIBS | sed -e "s/$export_dynamic//"`
     fi
 fi
-AM_CONDITIONAL(BUILD_EVINCE, $build_evince)
+AM_CONDITIONAL(BUILD_ATRIL, $build_atril)
 
 
 dnl add required cflags ...
@@ -396,7 +396,7 @@ AC_CONFIG_FILES(
   rsvg/Makefile
   matekeyring/Makefile
   matedesktop/Makefile
-  evince/Makefile
+  atril/Makefile
   mate-python-desktop-2.0.pc
   tests/Makefile
   docs/Makefile
@@ -423,7 +423,7 @@ $build_rsvg              && echo     rsvg
 $build_matekeyring      && echo     matekeyring
 $build_matedesktop      && echo     matedesktop
 $build_bugbuddy          && echo     bugbuddy
-$build_evince            && echo     evince
+$build_atril            && echo     atril
 echo
 
 echo "The following modules will NOT be built:"
@@ -442,7 +442,7 @@ $build_rsvg              || echo     rsvg
 $build_matekeyring      || echo     matekeyring
 $build_matedesktop      || echo     matedesktop
 $build_bugbuddy          || echo     bugbuddy
-$build_evince            || echo     evince
+$build_atril            || echo     atril
 
 
 echo "*****************************************************************************"

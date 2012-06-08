@@ -2,7 +2,7 @@ INCLUDES = $(PYTHON_INCLUDES) $(PYGTK_CFLAGS)
 
 defsdir = $(datadir)/pygtk/2.0/defs
 
-defs_DATA = evince.defs
+defs_DATA = atril.defs
 
 EXTRA_DIST = $(defs_DATA)
 
@@ -11,19 +11,19 @@ common_ldflags = -module -avoid-version
 pkgpythondir = $(pyexecdir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0
 
-# evince binding
+# atril binding
 
-if BUILD_EVINCE
-pkgpyexec_LTLIBRARIES = evince.la
+if BUILD_ATRIL
+pkgpyexec_LTLIBRARIES = atril.la
 endif
-evince_la_CFLAGS = $(EVINCE_CFLAGS)
-evince_la_LDFLAGS = $(common_ldflags) -export-symbols-regex initevince
-evince_la_LIBADD = $(EVINCE_LIBS)
-evince_la_SOURCES = evincemodule.c
-nodist_evince_la_SOURCES = evince.c
-CLEANFILES = evince.c
-EXTRA_DIST += evince.override  
-evince.c: evince.defs evince.override
+atril_la_CFLAGS = $(ATRIL_CFLAGS)
+atril_la_LDFLAGS = $(common_ldflags) -export-symbols-regex initatril
+atril_la_LIBADD = $(ATRIL_LIBS)
+atril_la_SOURCES = atrilmodule.c
+nodist_atril_la_SOURCES = atril.c
+CLEANFILES = atril.c
+EXTRA_DIST += atril.override  
+atril.c: atril.defs atril.override
 
 .defs.c:
 	(cd $(srcdir) \

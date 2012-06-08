@@ -53,8 +53,8 @@ if BUILD_MATEDESKTOP
   SUBDIRS += matedesktop
 endif
 
-if BUILD_EVINCE
-  SUBDIRS += evince
+if BUILD_ATRIL
+  SUBDIRS += atril
 endif
 
 SUBDIRS +=  tests

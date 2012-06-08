@@ -18,7 +18,7 @@ modules = [
     "rsvg",
     "matekeyring",
     "matedesktop",
-    "evince",
+    "atril",
     ]
 
 def run_import_tests(builddir, no_import_hooks):

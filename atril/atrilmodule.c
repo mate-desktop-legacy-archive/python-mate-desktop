@@ -6,16 +6,16 @@
 #include <pygobject.h>
 #include <pygtk/pygtk.h>
 
-#include <evince-document.h>
+#include <atril-document.h>
 #include <pycairo/pycairo.h>
 
 Pycairo_CAPI_t *Pycairo_CAPI;
 
 
-void pyevince_register_classes (PyObject *d);
-void pyevince_add_constants(PyObject *module, const gchar *strip_prefix);
+void pyatril_register_classes (PyObject *d);
+void pyatril_add_constants(PyObject *module, const gchar *strip_prefix);
 
-extern PyMethodDef pyevince_functions[];
+extern PyMethodDef pyatril_functions[];
 
 PyObject *
 _wrap_ev_shutdown (void)
@@ -28,7 +28,7 @@ _wrap_ev_shutdown (void)
 
 
 DL_EXPORT(void)
-initevince(void)
+initatril(void)
 {
     PyObject *m, *d;
 
@@ -44,11 +44,11 @@ initevince(void)
 
     ev_init ();
 
-    m = Py_InitModule ("evince", pyevince_functions);
+    m = Py_InitModule ("atril", pyatril_functions);
     d = PyModule_GetDict (m);
 
-    pyevince_register_classes (d);
-    pyevince_add_constants(m, "EV_");
+    pyatril_register_classes (d);
+    pyatril_add_constants(m, "EV_");
 
     if (PyErr_Occurred ()) {
         return;

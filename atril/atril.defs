@@ -580,11 +580,11 @@
 )
 
 
-;; From evince-document.h
+;; From atril-document.h
 
 
 
-;; From evince-view.h
+;; From atril-view.h
 
 
 
