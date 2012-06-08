@@ -18,11 +18,7 @@ modules = [
     "rsvg",
     "matekeyring",
     "matedesktop",
-    ("ebook", "evolution"),
-    ("ecal", "evolution"),
     "evince",
-    "braseromedia",
-    "braseroburn",
     ]
 
 def run_import_tests(builddir, no_import_hooks):

@@ -22,7 +22,6 @@ m4_define(gtksourceview_required_version,     1.1.90)
 m4_define(matewnck_required_version,              1.3.0)
 m4_define(libgtop_required_version,           2.13.0)
 m4_define(libcaja_burn_required_version,  1.1.0)
-m4_define(libbrasero_media_required_version,  2.29)
 m4_define(mediaprofiles_required_version,     2.10.0)
 m4_define(mateconf_required_version,             1.1.0)
 m4_define(marco_required_version,          1.1.0)
@@ -30,8 +29,6 @@ m4_define(rsvg_required_version,              2.13.93)
 m4_define(matekeyring_required_version,      1.1.0)
 m4_define(matedesktop_required_version,      1.1.0)
 m4_define(totem_required_version,             1.4.0)
-m4_define(libecal_required_version,           1.4.0)
-m4_define(libebook_required_version,          1.4.0)
 
 AC_INIT(mate-python-desktop, mate_python_desktop_version,
         [http://www.mate-desktop.org/])
@@ -134,7 +131,7 @@ AC_ARG_ENABLE([gtk-doc],
 AM_CONDITIONAL(BUILD_DOCS, [test "$enable_gtk_doc" = "yes"])
 
 dnl default bindings to build:
-default_bindings_on="applet mateprint mateprintui gtksourceview matewnck totem_plparser gtop cajaburn mediaprofiles rsvg matekeyring matedesktop bugbuddy marco evolution evolution_ecal evince braseromedia braseroburn"
+default_bindings_on="applet mateprint mateprintui gtksourceview matewnck totem_plparser gtop cajaburn mediaprofiles rsvg matekeyring matedesktop bugbuddy marco evince"
 default_bindings_off="marco"
 default_bindings_all="$default_bindings_on $default_bindings_off"
 
@@ -279,34 +276,6 @@ if test -n "$export_dynamic"; then
   CAJABURN_LIBS=`echo $CAJABURN_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
-dnl should we build the braseromedia module?
-AC_ARG_BINDING([braseromedia],[YES])
-if $build_braseromedia; then
-	PKG_CHECK_MODULES(BRASEROMEDIA, [libbrasero-media >= libbrasero_media_required_version
-					 pygtk-2.0 >= pygtk_required_version],
-	  build_braseromedia=true,
-	  build_braseromedia=false)
-fi
-AM_CONDITIONAL(BUILD_BRASEROMEDIA, $build_braseromedia)
-if test -n "$export_dynamic"; then
-  BRASEROMEDIA_LIBS=`echo $BRASEROMEDIA_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-
-dnl should we build the braseroburn module?
-AC_ARG_BINDING([braseroburn],[YES])
-if $build_braseroburn; then
-	PKG_CHECK_MODULES(BRASEROBURN, [libbrasero-burn >= 2.29
-					 pygtk-2.0 >= pygtk_required_version],
-	  build_braseroburn=true,
-	  build_braseroburn=false)
-fi
-AM_CONDITIONAL(BUILD_BRASEROBURN, $build_braseroburn)
-if test -n "$export_dynamic"; then
-  BRASEROBURN_LIBS=`echo $BRASEROBURN_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-
 dnl should we build the mediaprofiles module?
 AC_ARG_BINDING([mediaprofiles],[YES])
 if $build_mediaprofiles; then
@@ -395,42 +364,6 @@ if $build_bugbuddy; then
 fi
 AM_CONDITIONAL(BUILD_BUGBUDDY, $build_bugbuddy)
 
-dnl should we build the evolution module
-AC_ARG_BINDING([evolution],[YES])
-
-dnl can also build without ecal support (desirable for maemo)
-AC_ARG_BINDING([evolution_ecal],[YES],[Evolution ECal])
-
-if $build_evolution; then
-    PKG_CHECK_MODULES(EVOLUTION_EBOOK, [libebook-1.2 >= libebook_required_version
-                                        pygobject-2.0
-                                        gdk-pixbuf-2.0
-                                        pango],
-    build_evolution=true,
-    build_evolution=false)
-    if test -n "$export_dynamic"; then
-        EVOLUTION_EBOOK_LIBS=`echo $EVOLUTION_EBOOK_LIBS | sed -e "s/$export_dynamic//"`
-    fi
-    
-    if $build_evolution_ecal; then
-        PKG_CHECK_MODULES(EVOLUTION_ECAL,  [libecal-1.2 >= libecal_required_version
-                                            pygobject-2.0
-                                            gdk-pixbuf-2.0
-                                            pango],
-        build_evolution_ecal=true,
-        build_evolution_ecal=false)
-        if test -n "$export_dynamic"; then
-            EVOLUTION_ECAL_LIBS=`echo $EVOLUTION_ECAL_LIBS | sed -e "s/$export_dynamic//"`
-        fi
-    fi
-else
-    if $build_evolution_ecal; then
-      AC_MSG_ERROR(You must enable the Evolution module as well if you want the Evolution Cal module)
-    fi
-fi
-AM_CONDITIONAL(BUILD_EVOLUTION, $build_evolution)
-AM_CONDITIONAL(BUILD_EVOLUTION_ECAL, $build_evolution_ecal)
-
 dnl should we build the evince module
 AC_ARG_BINDING([evince],[YES])
 if $build_evince; then
@@ -458,14 +391,11 @@ AC_CONFIG_FILES(
   totem/Makefile
   gtop/Makefile
   cajaburn/Makefile
-  braseromedia/Makefile
-  braseroburn/Makefile
   mediaprofiles/Makefile
   marco/Makefile
   rsvg/Makefile
   matekeyring/Makefile
   matedesktop/Makefile
-  evolution/Makefile
   evince/Makefile
   mate-python-desktop-2.0.pc
   tests/Makefile
@@ -487,16 +417,12 @@ $build_matewnck              && echo     matewnck
 $build_totem_plparser    && echo     totem.plparser
 $build_gtop              && echo     gtop
 $build_cajaburn      && echo     cajaburn
-$build_braseromedia      && echo     braseromedia
-$build_braseroburn       && echo     braseroburn
 $build_mediaprofiles     && echo     mediaprofiles
 $build_marco          && echo     marco
 $build_rsvg              && echo     rsvg
 $build_matekeyring      && echo     matekeyring
 $build_matedesktop      && echo     matedesktop
 $build_bugbuddy          && echo     bugbuddy
-$build_evolution         && echo     evolution
-$build_evolution_ecal    && echo     evolution ecal support
 $build_evince            && echo     evince
 echo
 
@@ -510,16 +436,12 @@ $build_matewnck              || echo     matewnck
 $build_totem_plparser    || echo     totem.plparser
 $build_gtop              || echo     gtop
 $build_cajaburn      || echo     cajaburn
-$build_braseromedia      || echo     braseromedia
-$build_braseroburn       || echo     braseroburn
 $build_mediaprofiles     || echo     mediaprofiles
 $build_marco          || echo     marco
 $build_rsvg              || echo     rsvg
 $build_matekeyring      || echo     matekeyring
 $build_matedesktop      || echo     matedesktop
 $build_bugbuddy          || echo     bugbuddy
-$build_evolution         || echo     evolution
-$build_evolution_ecal    || echo     evolution ecal support
 $build_evince            || echo     evince
 
 

@@ -53,20 +53,8 @@ if BUILD_MATEDESKTOP
   SUBDIRS += matedesktop
 endif
 
-if BUILD_EVOLUTION
-  SUBDIRS += evolution
-endif
-
 if BUILD_EVINCE
   SUBDIRS += evince
-endif
-
-if BUILD_BRASEROMEDIA
-  SUBDIRS += braseromedia
-endif
-
-if BUILD_BRASEROBURN
-  SUBDIRS += braseroburn
 endif
 
 SUBDIRS +=  tests
@@ -114,11 +102,7 @@ EXTRA_DIST = \
   examples/keyring.py \
   examples/keyring-async.py \
   examples/rsvg/rsvg-cairo.py \
-  examples/matewnck_example.py \
-  examples/braseromedia/drive_selection.py \
-  examples/braseroburn/write-audio-video.py \
-  examples/braseroburn/write-image.py \
-  examples/braseroburn/write-data.py
+  examples/matewnck_example.py
 
 
 $(srcdir)/ChangeLog:

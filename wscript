@@ -113,14 +113,11 @@ def configure(conf):
     conf.sub_config('matedesktop')
     conf.sub_config('mateprint')
     conf.sub_config('evince')
-    conf.sub_config('evolution')
     conf.sub_config('gtksourceview')
     conf.sub_config('gtop')
     conf.sub_config('mediaprofiles')
     conf.sub_config('marco')
     conf.sub_config('cajaburn')
-    conf.sub_config('braseromedia')
-    conf.sub_config('braseroburn')
     conf.sub_config('rsvg')
     conf.sub_config('totem')
     conf.sub_config('matewnck')
@@ -262,14 +259,11 @@ def build(bld):
     bld.add_subdirs('matedesktop')
     bld.add_subdirs('mateprint')
     bld.add_subdirs('evince')
-    bld.add_subdirs('evolution')
     bld.add_subdirs('gtksourceview')
     bld.add_subdirs('gtop')
     bld.add_subdirs('mediaprofiles')
     bld.add_subdirs('marco')
     bld.add_subdirs('cajaburn')
-    bld.add_subdirs('braseromedia')
-    bld.add_subdirs('braseroburn')
     bld.add_subdirs('rsvg')
     bld.add_subdirs('totem')
     bld.add_subdirs('matewnck')
@@ -295,7 +289,7 @@ def _run_tests(env):
     import shutil
     builddir = os.path.join(blddir, env.variant())
     # copy the __init__.py files
-    for subdir in ["evolution", "matedesktop", "mateprint", "totem"]:
+    for subdir in ["matedesktop", "mateprint", "totem"]:
         src = os.path.join(subdir, "__init__.py")
         dst = os.path.join(builddir, subdir)
         try:
