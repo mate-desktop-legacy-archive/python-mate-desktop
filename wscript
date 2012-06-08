@@ -123,7 +123,7 @@ def configure(conf):
     conf.sub_config('braseroburn')
     conf.sub_config('rsvg')
     conf.sub_config('totem')
-    conf.sub_config('wnck')
+    conf.sub_config('matewnck')
 
     _bug_buddy_check(conf)
 
@@ -272,7 +272,7 @@ def build(bld):
     bld.add_subdirs('braseroburn')
     bld.add_subdirs('rsvg')
     bld.add_subdirs('totem')
-    bld.add_subdirs('wnck')
+    bld.add_subdirs('matewnck')
 
     bld.add_subdirs('docs/mateprint')
     bld.add_subdirs('docs/mateprintui')

@@ -2,7 +2,7 @@ INCLUDES = $(PYTHON_INCLUDES) $(PYGTK_CFLAGS)
 
 defsdir = $(datadir)/pygtk/2.0/defs
 
-defs_DATA = wnck.defs
+defs_DATA = matewnck.defs
 
 EXTRA_DIST = $(defs_DATA)
 
@@ -11,19 +11,19 @@ common_ldflags = -module -avoid-version
 pkgpythondir = $(pyexecdir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0
 
-# wnck binding
+# matewnck binding
 
-if BUILD_WNCK
-pkgpyexec_LTLIBRARIES = wnck.la
+if BUILD_MATEWNCK
+pkgpyexec_LTLIBRARIES = matewnck.la
 endif
-wnck_la_CFLAGS = $(WNCK_CFLAGS) -DWNCK_I_KNOW_THIS_IS_UNSTABLE
-wnck_la_LDFLAGS = $(common_ldflags) -export-symbols-regex initwnck
-wnck_la_LIBADD = $(WNCK_LIBS)
-wnck_la_SOURCES = wnckmodule.c
-nodist_wnck_la_SOURCES = wnck.c
-CLEANFILES = wnck.c
-EXTRA_DIST += wnck.override  
-wnck.c: wnck.defs wnck.override
+matewnck_la_CFLAGS = $(MATEWNCK_CFLAGS) -DMATEWNCK_I_KNOW_THIS_IS_UNSTABLE
+matewnck_la_LDFLAGS = $(common_ldflags) -export-symbols-regex initmatewnck
+matewnck_la_LIBADD = $(MATEWNCK_LIBS)
+matewnck_la_SOURCES = matewnckmodule.c
+nodist_matewnck_la_SOURCES = matewnck.c
+CLEANFILES = matewnck.c
+EXTRA_DIST += matewnck.override  
+matewnck.c: matewnck.defs matewnck.override
 
 .defs.c:
 	(cd $(srcdir) \

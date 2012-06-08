@@ -1,0 +1,26 @@
+# -*- python -*-
+# encoding: utf-8
+
+def configure(conf):
+    conf.env.append_value('MODULES_AVAILABLE', 'matewnck')
+    if 'matewnck' in conf.env['ENABLE_MODULES'] or 'all' in conf.env['ENABLE_MODULES']:
+        if conf.pkg_check_modules('MATEWNCK',
+                                  'libmatewnck >= 2.20 pygobject-2.0 pygtk-2.0',
+                                  mandatory=False):
+            conf.env.append_value('MODULES_TO_BUILD', 'matewnck')
+
+
+
+def build(bld):
+    
+    if 'matewnck' in bld.env['MODULES_TO_BUILD']:
+        bld.codegen('matewnck')
+        pyext = bld.create_pyext()
+        pyext.env.append_value('CCDEFINES', 'MATEWNCK_I_KNOW_THIS_IS_UNSTABLE')
+        pyext.source = 'matewnckmodule.c matewnck.c'
+        pyext.target = 'matewnck'
+        pyext.uselib = 'MATEWNCK'
+        pyext.install_path = '${PYTHONDIR}/gtk-2.0'
+
+        bld.install_files('${DATADIR}/pygtk/2.0/defs', 'matewnck.defs')
+

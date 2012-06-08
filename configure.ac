@@ -19,7 +19,7 @@ m4_define(libmatepanelapplet_required_version,    1.1.0)
 m4_define(libmateprint_required_version,     1.1.0)
 m4_define(libmateprintui_required_version,   1.1.0)
 m4_define(gtksourceview_required_version,     1.1.90)
-m4_define(wnck_required_version,              2.19.3)
+m4_define(matewnck_required_version,              1.3.0)
 m4_define(libgtop_required_version,           2.13.0)
 m4_define(libcaja_burn_required_version,  1.1.0)
 m4_define(libbrasero_media_required_version,  2.29)
@@ -134,7 +134,7 @@ AC_ARG_ENABLE([gtk-doc],
 AM_CONDITIONAL(BUILD_DOCS, [test "$enable_gtk_doc" = "yes"])
 
 dnl default bindings to build:
-default_bindings_on="applet mateprint mateprintui gtksourceview wnck totem_plparser gtop cajaburn mediaprofiles rsvg matekeyring matedesktop bugbuddy marco evolution evolution_ecal evince braseromedia braseroburn"
+default_bindings_on="applet mateprint mateprintui gtksourceview matewnck totem_plparser gtop cajaburn mediaprofiles rsvg matekeyring matedesktop bugbuddy marco evolution evolution_ecal evince braseromedia braseroburn"
 default_bindings_off="marco"
 default_bindings_all="$default_bindings_on $default_bindings_off"
 
@@ -228,16 +228,16 @@ if test -n "$export_dynamic"; then
 fi
 
 
-dnl should we build the wnck module
-AC_ARG_BINDING([wnck],[YES])
-if $build_wnck; then
-	PKG_CHECK_MODULES(WNCK, libwnck-1.0 >= wnck_required_version,
-	  build_wnck=true,
-	  build_wnck=false)
+dnl should we build the matewnck module
+AC_ARG_BINDING([matewnck],[YES])
+if $build_matewnck; then
+	PKG_CHECK_MODULES(MATEWNCK, libmatewnck >= matewnck_required_version,
+	  build_matewnck=true,
+	  build_matewnck=false)
 fi
-AM_CONDITIONAL(BUILD_WNCK, $build_wnck)
+AM_CONDITIONAL(BUILD_MATEWNCK, $build_matewnck)
 if test -n "$export_dynamic"; then
-  WNCK_LIBS=`echo $WNCK_LIBS | sed -e "s/$export_dynamic//"`
+  MATEWNCK_LIBS=`echo $MATEWNCK_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
 
@@ -454,7 +454,7 @@ AC_CONFIG_FILES(
   mateapplet/Makefile
   mateprint/Makefile
   gtksourceview/Makefile
-  wnck/Makefile
+  matewnck/Makefile
   totem/Makefile
   gtop/Makefile
   cajaburn/Makefile
@@ -483,7 +483,7 @@ $build_applet            && $have_pymatecorba && echo     mateapplet
 $build_mateprint        && echo     mateprint
 $build_mateprintui      && echo     mateprint.ui
 $build_gtksourceview     && echo     gtksourceview
-$build_wnck              && echo     wnck
+$build_matewnck              && echo     matewnck
 $build_totem_plparser    && echo     totem.plparser
 $build_gtop              && echo     gtop
 $build_cajaburn      && echo     cajaburn
@@ -506,7 +506,7 @@ $build_applet            && $have_pymatecorba || echo     mateapplet
 $build_mateprint        || echo     mateprint
 $build_mateprintui      || echo     mateprint.ui
 $build_gtksourceview     || echo     gtksourceview
-$build_wnck              || echo     wnck
+$build_matewnck              || echo     matewnck
 $build_totem_plparser    || echo     totem.plparser
 $build_gtop              || echo     gtop
 $build_cajaburn      || echo     cajaburn

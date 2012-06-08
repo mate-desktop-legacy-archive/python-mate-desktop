@@ -6,14 +6,14 @@ headers
 #define NO_IMPORT_PYGOBJECT
 #include <pygobject.h>
 
-#include <libwnck/libwnck.h>
-#include <libwnck/class-group.h>
-#include <libwnck/window-action-menu.h>
+#include <libmatewnck/libmatewnck.h>
+#include <libmatewnck/class-group.h>
+#include <libmatewnck/window-action-menu.h>
 
 #include "config.h"
 
 %%
-modulename wnck
+modulename matewnck
 %%
 import gobject.GObject as PyGObject_Type
 import gtk.Container as PyGtkContainer_Type
@@ -24,14 +24,14 @@ ignore-glob
  _*
  *_get_type
 %%
-override wnck_application_get_windows noargs
+override matewnck_application_get_windows noargs
 static PyObject*
-_wrap_wnck_application_get_windows (PyGObject *self, PyObject args)
+_wrap_matewnck_application_get_windows (PyGObject *self, PyObject args)
 {
     GList *list, *tmp;
     PyObject *ret;
 
-    list = wnck_application_get_windows(WNCK_APPLICATION(self->obj));
+    list = matewnck_application_get_windows(MATEWNCK_APPLICATION(self->obj));
 
     ret = PyList_New(0);
     for (tmp = list; tmp != NULL; tmp = tmp->next) {
@@ -44,14 +44,14 @@ _wrap_wnck_application_get_windows (PyGObject *self, PyObject args)
     return ret;
 }
 %%
-override wnck_screen_get_windows noargs
+override matewnck_screen_get_windows noargs
 static PyObject*
-_wrap_wnck_screen_get_windows (PyGObject *self, PyObject args)
+_wrap_matewnck_screen_get_windows (PyGObject *self, PyObject args)
 {
     GList *list, *tmp;
     PyObject *ret;
 
-    list = wnck_screen_get_windows(WNCK_SCREEN(self->obj));
+    list = matewnck_screen_get_windows(MATEWNCK_SCREEN(self->obj));
 
     ret = PyList_New(0);
     for (tmp = list; tmp != NULL; tmp = tmp->next) {
@@ -64,14 +64,14 @@ _wrap_wnck_screen_get_windows (PyGObject *self, PyObject args)
     return ret;
 }
 %%
-override wnck_screen_get_windows_stacked noargs
+override matewnck_screen_get_windows_stacked noargs
 static PyObject*
-_wrap_wnck_screen_get_windows_stacked(PyGObject *self, PyObject args)
+_wrap_matewnck_screen_get_windows_stacked(PyGObject *self, PyObject args)
 {
     GList *list, *tmp;
     PyObject *ret;
 
-    list = wnck_screen_get_windows_stacked(WNCK_SCREEN(self->obj));
+    list = matewnck_screen_get_windows_stacked(MATEWNCK_SCREEN(self->obj));
 
     ret = PyList_New(0);
     for (tmp = list; tmp != NULL; tmp = tmp->next) {
@@ -84,14 +84,14 @@ _wrap_wnck_screen_get_windows_stacked(PyGObject *self, PyObject args)
     return ret;
 }
 %%
-override wnck_class_group_get_windows noargs
+override matewnck_class_group_get_windows noargs
 static PyObject*
-_wrap_wnck_class_group_get_windows(PyGObject *self, PyObject args)
+_wrap_matewnck_class_group_get_windows(PyGObject *self, PyObject args)
 {
     GList *list, *tmp;
     PyObject *ret;
 
-    list = wnck_class_group_get_windows(WNCK_CLASS_GROUP(self->obj));
+    list = matewnck_class_group_get_windows(MATEWNCK_CLASS_GROUP(self->obj));
 
     ret = PyList_New(0);
     for (tmp = list; tmp != NULL; tmp = tmp->next) {
@@ -104,39 +104,39 @@ _wrap_wnck_class_group_get_windows(PyGObject *self, PyObject args)
     return ret;
 }
 %%
-override wnck_tasklist_get_size_hint_list
+override matewnck_tasklist_get_size_hint_list
 static PyObject *
-_wrap_wnck_tasklist_get_size_hint_list(PyGObject *self)
+_wrap_matewnck_tasklist_get_size_hint_list(PyGObject *self)
 {
     const int *list;
     PyObject *pylist;
     int i, len = 0;
 
-    list = wnck_tasklist_get_size_hint_list(WNCK_TASKLIST(self->obj), &len);
+    list = matewnck_tasklist_get_size_hint_list(MATEWNCK_TASKLIST(self->obj), &len);
     pylist = PyList_New(len);
     for (i = 0; i < len; ++i)
         PyList_SET_ITEM(pylist, i, PyInt_FromLong(list[i]));
     return pylist;
 }
 %%
-override wnck_window_get_geometry noargs
+override matewnck_window_get_geometry noargs
 static PyObject *
-_wrap_wnck_window_get_geometry(PyGObject *self)
+_wrap_matewnck_window_get_geometry(PyGObject *self)
 {
     int x, y, width, height;
 
-    wnck_window_get_geometry(WNCK_WINDOW(self->obj), &x, &y, &width, &height);
+    matewnck_window_get_geometry(MATEWNCK_WINDOW(self->obj), &x, &y, &width, &height);
     return Py_BuildValue("iiii", x, y, width, height);
 }
 %%
-override wnck_screen_get_workspaces noargs
+override matewnck_screen_get_workspaces noargs
 static PyObject*
-_wrap_wnck_screen_get_workspaces (PyGObject *self)
+_wrap_matewnck_screen_get_workspaces (PyGObject *self)
 {
     GList *list, *tmp;
     PyObject *ret;
 
-    list = wnck_screen_get_workspaces(WNCK_SCREEN(self->obj));
+    list = matewnck_screen_get_workspaces(MATEWNCK_SCREEN(self->obj));
 
     ret = PyList_New(0);
     for (tmp = list; tmp != NULL; tmp = tmp->next) {
@@ -149,12 +149,12 @@ _wrap_wnck_screen_get_workspaces (PyGObject *self)
     return ret;
 }
 %%
-override wnck_window_get_client_window_geometry noargs
+override matewnck_window_get_client_window_geometry noargs
 static PyObject *
-_wrap_wnck_window_get_client_window_geometry(PyGObject *self)
+_wrap_matewnck_window_get_client_window_geometry(PyGObject *self)
 {
     int x, y, width, height;
 
-    wnck_window_get_client_window_geometry(WNCK_WINDOW(self->obj), &x, &y, &width, &height);
+    matewnck_window_get_client_window_geometry(MATEWNCK_WINDOW(self->obj), &x, &y, &width, &height);
     return Py_BuildValue("iiii", x, y, width, height);
 }

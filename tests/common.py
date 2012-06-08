@@ -9,7 +9,7 @@ modules = [
     "mateprint",
     ("ui", "mateprint"),
     "gtksourceview",
-    "wnck",
+    "matewnck",
     ("plparser", "totem"),
     "gtop",
     "cajaburn",

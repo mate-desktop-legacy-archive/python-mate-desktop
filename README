@@ -3,7 +3,7 @@ This package contains a few python modules that used to live in mate-python-extr
   - mateapplet
   - mateprint, mateprint.ui
   - gtksourceview
-  - wnck
+  - matewnck
   - totem.plparser
   - gtop
   - cajaburn

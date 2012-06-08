@@ -1,0 +1,1475 @@
+;; -*- scheme -*-
+; object definitions ...
+(define-object Application
+  (in-module "Matewnck")
+  (parent "GObject")
+  (c-name "MatewnckApplication")
+  (gtype-id "MATEWNCK_TYPE_APPLICATION")
+)
+
+(define-object ClassGroup
+  (in-module "Matewnck")
+  (parent "GObject")
+  (c-name "MatewnckClassGroup")
+  (gtype-id "MATEWNCK_TYPE_CLASS_GROUP")
+)
+
+(define-object Pager
+  (in-module "Matewnck")
+  (parent "GtkContainer")
+  (c-name "MatewnckPager")
+  (gtype-id "MATEWNCK_TYPE_PAGER")
+)
+
+(define-object Screen
+  (in-module "Matewnck")
+  (parent "GObject")
+  (c-name "MatewnckScreen")
+  (gtype-id "MATEWNCK_TYPE_SCREEN")
+)
+
+(define-object Tasklist
+  (in-module "Matewnck")
+  (parent "GtkContainer")
+  (c-name "MatewnckTasklist")
+  (gtype-id "MATEWNCK_TYPE_TASKLIST")
+)
+
+(define-object Window
+  (in-module "Matewnck")
+  (parent "GObject")
+  (c-name "MatewnckWindow")
+  (gtype-id "MATEWNCK_TYPE_WINDOW")
+)
+
+(define-object Workspace
+  (in-module "Matewnck")
+  (parent "GObject")
+  (c-name "MatewnckWorkspace")
+  (gtype-id "MATEWNCK_TYPE_WORKSPACE")
+)
+
+(define-object Selector
+  (in-module "Matewnck")
+  (parent "GtkMenuBar")
+  (c-name "MatewnckSelector")
+  (gtype-id "MATEWNCK_TYPE_SELECTOR")
+)
+
+;; Enumerations and flags ...
+
+(define-enum ClientType
+  (in-module "Matewnck")
+  (c-name "MatewnckClientType")
+  (values
+   '("application" "MATEWNCK_CLIENT_TYPE_APPLICATION")
+   '("pager" "MATEWNCK_CLIENT_TYPE_PAGER")
+  )
+)
+
+(define-enum PagerDisplayMode
+  (in-module "Matewnck")
+  (c-name "MatewnckPagerDisplayMode")
+  (gtype-id "MATEWNCK_TYPE_PAGER_DISPLAY_MODE")
+  (values
+    '("name" "MATEWNCK_PAGER_DISPLAY_NAME")
+    '("content" "MATEWNCK_PAGER_DISPLAY_CONTENT")
+  )
+)
+
+(define-enum MotionDirection
+  (in-module "Matewnck")
+  (c-name "MatewnckMotionDirection")
+  (gtype-id "MATEWNCK_TYPE_MOTION_DIRECTION")
+  (values
+    '("up" "MATEWNCK_MOTION_UP")
+    '("down" "MATEWNCK_MOTION_DOWN")
+    '("left" "MATEWNCK_MOTION_LEFT")
+    '("right" "MATEWNCK_MOTION_RIGHT")
+  )
+)
+
+(define-enum TasklistGroupingType
+  (in-module "Matewnck")
+  (c-name "MatewnckTasklistGroupingType")
+  (gtype-id "MATEWNCK_TYPE_TASKLIST_GROUPING_TYPE")
+  (values
+    '("never-group" "MATEWNCK_TASKLIST_NEVER_GROUP")
+    '("auto-group" "MATEWNCK_TASKLIST_AUTO_GROUP")
+    '("always-group" "MATEWNCK_TASKLIST_ALWAYS_GROUP")
+  )
+)
+
+(define-enum WindowState
+  (in-module "Matewnck")
+  (c-name "MatewnckWindowState")
+  (gtype-id "MATEWNCK_TYPE_WINDOW_STATE")
+  (values
+    '("minimized" "MATEWNCK_WINDOW_STATE_MINIMIZED")
+    '("maximized-horizontally" "MATEWNCK_WINDOW_STATE_MAXIMIZED_HORIZONTALLY")
+    '("maximized-vertically" "MATEWNCK_WINDOW_STATE_MAXIMIZED_VERTICALLY")
+    '("shaded" "MATEWNCK_WINDOW_STATE_SHADED")
+    '("skip-pager" "MATEWNCK_WINDOW_STATE_SKIP_PAGER")
+    '("skip-tasklist" "MATEWNCK_WINDOW_STATE_SKIP_TASKLIST")
+    '("sticky" "MATEWNCK_WINDOW_STATE_STICKY")
+    '("hidden" "MATEWNCK_WINDOW_STATE_HIDDEN")
+    '("fullscreen" "MATEWNCK_WINDOW_STATE_FULLSCREEN")
+    '("demands-attention" "MATEWNCK_WINDOW_STATE_DEMANDS_ATTENTION")
+    '("urgent" "MATEWNCK_WINDOW_STATE_URGENT")
+    '("above" "MATEWNCK_WINDOW_STATE_ABOVE")
+    '("below" "MATEWNCK_WINDOW_STATE_BELOW")
+  )
+)
+
+(define-enum WindowActions
+  (in-module "Matewnck")
+  (c-name "MatewnckWindowActions")
+  (gtype-id "MATEWNCK_TYPE_WINDOW_ACTIONS")
+  (values
+    '("move" "MATEWNCK_WINDOW_ACTION_MOVE")
+    '("resize" "MATEWNCK_WINDOW_ACTION_RESIZE")
+    '("shade" "MATEWNCK_WINDOW_ACTION_SHADE")
+    '("stick" "MATEWNCK_WINDOW_ACTION_STICK")
+    '("maximize-horizontally" "MATEWNCK_WINDOW_ACTION_MAXIMIZE_HORIZONTALLY")
+    '("maximize-vertically" "MATEWNCK_WINDOW_ACTION_MAXIMIZE_VERTICALLY")
+    '("change-workspace" "MATEWNCK_WINDOW_ACTION_CHANGE_WORKSPACE")
+    '("close" "MATEWNCK_WINDOW_ACTION_CLOSE")
+    '("unmaximize-horizontally" "MATEWNCK_WINDOW_ACTION_UNMAXIMIZE_HORIZONTALLY")
+    '("unmaximize-vertically" "MATEWNCK_WINDOW_ACTION_UNMAXIMIZE_VERTICALLY")
+    '("unshade" "MATEWNCK_WINDOW_ACTION_UNSHADE")
+    '("unstick" "MATEWNCK_WINDOW_ACTION_UNSTICK")
+    '("minimize" "MATEWNCK_WINDOW_ACTION_MINIMIZE")
+    '("unminimize" "MATEWNCK_WINDOW_ACTION_UNMINIMIZE")
+    '("maximize" "MATEWNCK_WINDOW_ACTION_MAXIMIZE")
+    '("unmaximize" "MATEWNCK_WINDOW_ACTION_UNMAXIMIZE")
+    '("fullscreen" "MATEWNCK_WINDOW_ACTION_FULLSCREEN")
+    '("above" "MATEWNCK_WINDOW_ACTION_ABOVE")
+    '("below" "MATEWNCK_WINDOW_ACTION_BELOW")
+  )
+)
+
+(define-enum WindowType
+  (in-module "Matewnck")
+  (c-name "MatewnckWindowType")
+  (gtype-id "MATEWNCK_TYPE_WINDOW_TYPE")
+  (values
+    '("normal" "MATEWNCK_WINDOW_NORMAL")
+    '("desktop" "MATEWNCK_WINDOW_DESKTOP")
+    '("dock" "MATEWNCK_WINDOW_DOCK")
+    '("dialog" "MATEWNCK_WINDOW_DIALOG")
+    '("modal-dialog" "MATEWNCK_WINDOW_MODAL_DIALOG")
+    '("toolbar" "MATEWNCK_WINDOW_TOOLBAR")
+    '("menu" "MATEWNCK_WINDOW_MENU")
+    '("utility" "MATEWNCK_WINDOW_UTILITY")
+    '("splashscreen" "MATEWNCK_WINDOW_SPLASHSCREEN")
+  )
+)
+
+(define-enum WindowGravity
+  (in-module "Matewnck")
+  (c-name "MatewnckWindowGravity")
+  (gtype-id "MATEWNCK_TYPE_WINDOW_GRAVITY")
+  (values
+    '("current" "MATEWNCK_WINDOW_GRAVITY_CURRENT")
+    '("northwest" "MATEWNCK_WINDOW_GRAVITY_NORTHWEST")
+    '("north" "MATEWNCK_WINDOW_GRAVITY_NORTH")
+    '("northeast" "MATEWNCK_WINDOW_GRAVITY_NORTHEAST")
+    '("west" "MATEWNCK_WINDOW_GRAVITY_WEST")
+    '("center" "MATEWNCK_WINDOW_GRAVITY_CENTER")
+    '("east" "MATEWNCK_WINDOW_GRAVITY_EAST")
+    '("southwest" "MATEWNCK_WINDOW_GRAVITY_SOUTHWEST")
+    '("south" "MATEWNCK_WINDOW_GRAVITY_SOUTH")
+    '("southeast" "MATEWNCK_WINDOW_GRAVITY_SOUTHEAST")
+    '("static" "MATEWNCK_WINDOW_GRAVITY_STATIC")
+  )
+)
+
+(define-enum WindowMoveResizeMask
+  (in-module "Matewnck")
+  (c-name "MatewnckWindowMoveResizeMask")
+  (gtype-id "MATEWNCK_TYPE_WINDOW_MOVE_RESIZE_MASK")
+  (values
+    '("change-x" "MATEWNCK_WINDOW_CHANGE_X")
+    '("change-y" "MATEWNCK_WINDOW_CHANGE_Y")
+    '("change-width" "MATEWNCK_WINDOW_CHANGE_WIDTH")
+    '("change-height" "MATEWNCK_WINDOW_CHANGE_HEIGHT")
+  )
+)
+
+
+;; From /usr/include/libmatewnck/libmatewnck/application.h
+
+(define-function matewnck_application_get_type
+  (c-name "matewnck_application_get_type")
+  (return-type "GType")
+)
+
+(define-function application_get
+  (c-name "matewnck_application_get")
+  (return-type "MatewnckApplication*")
+  (parameters
+    '("gulong" "xwindow")
+  )
+)
+
+(define-method get_xid
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_xid")
+  (return-type "gulong")
+)
+
+(define-method get_windows
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_windows")
+  (return-type "GList*")
+)
+
+(define-method get_n_windows
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_n_windows")
+  (return-type "int")
+)
+
+(define-method get_name
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_name")
+  (return-type "const-char*")
+)
+
+(define-method get_icon_name
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_icon_name")
+  (return-type "const-char*")
+)
+
+(define-method get_pid
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_pid")
+  (return-type "int")
+)
+
+(define-method get_icon
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_icon")
+  (return-type "GdkPixbuf*")
+)
+
+(define-method get_mini_icon
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_mini_icon")
+  (return-type "GdkPixbuf*")
+)
+
+(define-method get_icon_is_fallback
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_icon_is_fallback")
+  (return-type "gboolean")
+)
+
+(define-method get_startup_id
+  (of-object "MatewnckApplication")
+  (c-name "matewnck_application_get_startup_id")
+  (return-type "const-char*")
+)
+
+
+
+;; From /usr/include/libmatewnck/libmatewnck/class-group.h
+
+(define-function class_group_get_type
+  (c-name "matewnck_class_group_get_type")
+  (return-type "GType")
+)
+
+(define-function class_group_get
+  (c-name "matewnck_class_group_get")
+  (return-type "MatewnckClassGroup*")
+  (parameters
+    '("const-char*" "res_class")
+  )
+)
+
+(define-method get_windows
+  (of-object "MatewnckClassGroup")
+  (c-name "matewnck_class_group_get_windows")
+  (return-type "GList*")
+)
+
+(define-method get_res_class
+  (of-object "MatewnckClassGroup")
+  (c-name "matewnck_class_group_get_res_class")
+  (return-type "const-char*")
+)
+
+(define-method get_name
+  (of-object "MatewnckClassGroup")
+  (c-name "matewnck_class_group_get_name")
+  (return-type "const-char*")
+)
+
+(define-method get_icon
+  (of-object "MatewnckClassGroup")
+  (c-name "matewnck_class_group_get_icon")
+  (return-type "GdkPixbuf*")
+)
+
+(define-method get_mini_icon
+  (of-object "MatewnckClassGroup")
+  (c-name "matewnck_class_group_get_mini_icon")
+  (return-type "GdkPixbuf*")
+)
+
+
+
+;; From /usr/include/libmatewnck/libmatewnck/libmatewnck.h
+
+
+
+;; From /usr/include/libmatewnck/libmatewnck/pager.h
+
+(define-function matewnck_pager_get_type
+  (c-name "matewnck_pager_get_type")
+  (return-type "GType")
+)
+
+(define-function matewnck_pager_new
+  (c-name "matewnck_pager_new")
+  (is-constructor-of "MatewnckPager")
+  (return-type "GtkWidget*")
+  (parameters
+    '("MatewnckScreen*" "screen")
+  )
+)
+
+(define-method set_screen
+  (of-object "MatewnckPager")
+  (c-name "matewnck_pager_set_screen")
+  (return-type "none")
+  (parameters
+    '("MatewnckScreen*" "screen")
+  )
+)
+
+(define-method set_orientation
+  (of-object "MatewnckPager")
+  (c-name "matewnck_pager_set_orientation")
+  (return-type "none")
+  (parameters
+    '("GtkOrientation" "orientation")
+  )
+)
+
+(define-method set_n_rows
+  (of-object "MatewnckPager")
+  (c-name "matewnck_pager_set_n_rows")
+  (return-type "none")
+  (parameters
+    '("int" "n_rows")
+  )
+)
+
+(define-method set_display_mode
+  (of-object "MatewnckPager")
+  (c-name "matewnck_pager_set_display_mode")
+  (return-type "none")
+  (parameters
+    '("MatewnckPagerDisplayMode" "mode")
+  )
+)
+
+(define-method set_show_all
+  (of-object "MatewnckPager")
+  (c-name "matewnck_pager_set_show_all")
+  (return-type "none")
+  (parameters
+    '("gboolean" "show_all_workspaces")
+  )
+)
+
+(define-method set_shadow_type
+  (of-object "MatewnckPager")
+  (c-name "matewnck_pager_set_shadow_type")
+  (return-type "none")
+  (parameters
+    '("GtkShadowType" "shadow_type")
+  )
+)
+
+
+
+;; From /usr/include/libmatewnck/libmatewnck/screen.h
+
+(define-function matewnck_screen_get_type
+  (c-name "matewnck_screen_get_type")
+  (return-type "GType")
+)
+
+(define-function screen_get_default
+  (c-name "matewnck_screen_get_default")
+  (return-type "MatewnckScreen*")
+)
+
+(define-function screen_get
+  (c-name "matewnck_screen_get")
+  (return-type "MatewnckScreen*")
+  (parameters
+    '("int" "index")
+  )
+)
+
+(define-function screen_get_for_root
+  (c-name "matewnck_screen_get_for_root")
+  (return-type "MatewnckScreen*")
+  (parameters
+    '("gulong" "root_window_id")
+  )
+)
+
+(define-method get_number
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_number")
+  (return-type "int")
+)
+
+(define-method get_workspace
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_workspace")
+  (return-type "MatewnckWorkspace*")
+  (parameters
+    '("int" "workspace")
+  )
+)
+
+(define-method get_workspace_index
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_workspace_index")
+  (return-type "int")
+  (parameters
+    '("MatewnckWorkspace*" "space")
+  )
+)
+
+(define-method get_workspace_neighbor
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_workspace_neighbor")
+  (return-type "MatewnckWorkspace*")
+  (parameters
+    '("MatewnckWorkspace*" "space")
+    '("MatewnckMotionDirection" "direction")
+  )
+)
+
+(define-method get_active_workspace
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_active_workspace")
+  (return-type "MatewnckWorkspace*")
+)
+
+(define-method get_workspaces
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_workspaces")
+  (return-type "GList*")
+)
+
+(define-method get_active_window
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_active_window")
+  (return-type "MatewnckWindow*")
+)
+
+(define-method get_previously_active_window
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_previously_active_window")
+  (return-type "MatewnckWindow*")
+)
+
+(define-method get_windows
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_windows")
+  (return-type "GList*")
+)
+
+(define-method get_windows_stacked
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_windows_stacked")
+  (return-type "GList*")
+)
+
+(define-method force_update
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_force_update")
+  (return-type "none")
+)
+
+(define-method get_workspace_count
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_workspace_count")
+  (return-type "int")
+)
+
+(define-method change_workspace_count
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_change_workspace_count")
+  (return-type "none")
+  (parameters
+    '("int" "count")
+  )
+)
+
+(define-method get_window_manager_name
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_window_manager_name")
+  (return-type "const-char*")
+)
+
+(define-method net_wm_supports
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_net_wm_supports")
+  (return-type "gboolean")
+  (parameters
+    '("const-char*" "atom")
+  )
+)
+
+(define-method get_background_pixmap
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_background_pixmap")
+  (return-type "gulong")
+)
+
+(define-method get_width
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_width")
+  (return-type "int")
+)
+
+(define-method get_height
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_height")
+  (return-type "int")
+)
+
+(define-method get_showing_desktop
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_get_showing_desktop")
+  (return-type "gboolean")
+)
+
+(define-method toggle_showing_desktop
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_toggle_showing_desktop")
+  (return-type "none")
+  (parameters
+    '("gboolean" "show")
+  )
+)
+
+(define-method move_viewport
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_move_viewport")
+  (return-type "none")
+  (parameters
+    '("int" "x")
+    '("int" "y")
+  )
+)
+
+(define-method try_set_workspace_layout
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_try_set_workspace_layout")
+  (return-type "int")
+  (parameters
+    '("int" "current_token")
+    '("int" "rows")
+    '("int" "columns")
+  )
+)
+
+(define-method release_workspace_layout
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_release_workspace_layout")
+  (return-type "none")
+  (parameters
+    '("int" "current_token")
+  )
+)
+
+(define-method calc_workspace_layout
+  (of-object "MatewnckScreen")
+  (c-name "matewnck_screen_calc_workspace_layout")
+  (return-type "none")
+  (parameters
+    '("int" "num_workspaces")
+    '("int" "space_index")
+    '("MatewnckWorkspaceLayout*" "layout")
+  )
+)
+
+(define-function matewnck_screen_free_workspace_layout
+  (c-name "matewnck_screen_free_workspace_layout")
+  (return-type "none")
+  (parameters
+    '("MatewnckWorkspaceLayout*" "layout")
+  )
+)
+
+
+
+;; From /usr/include/libmatewnck/libmatewnck/tasklist.h
+
+(define-function matewnck_tasklist_get_type
+  (c-name "matewnck_tasklist_get_type")
+  (return-type "GType")
+)
+
+(define-function matewnck_tasklist_new
+  (c-name "matewnck_tasklist_new")
+  (is-constructor-of "MatewnckTasklist")
+  (return-type "GtkWidget*")
+  (parameters
+    '("MatewnckScreen*" "screen")
+  )
+)
+
+(define-method set_screen
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_set_screen")
+  (return-type "none")
+  (parameters
+    '("MatewnckScreen*" "screen")
+  )
+)
+
+(define-method get_size_hint_list
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_get_size_hint_list")
+  (return-type "const-int*")
+  (parameters
+    '("int*" "n_elements")
+  )
+)
+
+(define-method set_grouping
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_set_grouping")
+  (return-type "none")
+  (parameters
+    '("MatewnckTasklistGroupingType" "grouping")
+  )
+)
+
+(define-method set_switch_workspace_on_unminimize
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_set_switch_workspace_on_unminimize")
+  (return-type "none")
+  (parameters
+    '("gboolean" "switch_workspace_on_unminimize")
+  )
+)
+
+(define-method set_grouping_limit
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_set_grouping_limit")
+  (return-type "none")
+  (parameters
+    '("gint" "limit")
+  )
+)
+
+(define-method set_include_all_workspaces
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_set_include_all_workspaces")
+  (return-type "none")
+  (parameters
+    '("gboolean" "include_all_workspaces")
+  )
+)
+
+(define-method set_button_relief
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_set_button_relief")
+  (return-type "none")
+  (parameters
+    '("GtkReliefStyle" "relief")
+  )
+)
+
+(define-method set_minimum_width
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_set_minimum_width")
+  (return-type "none")
+  (parameters
+    '("gint" "size")
+  )
+)
+
+(define-method get_minimum_width
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_get_minimum_width")
+  (return-type "gint")
+)
+
+(define-method set_minimum_height
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_set_minimum_height")
+  (return-type "none")
+  (parameters
+    '("gint" "size")
+  )
+)
+
+(define-method get_minimum_height
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_get_minimum_height")
+  (return-type "gint")
+)
+
+(define-method set_icon_loader
+  (of-object "MatewnckTasklist")
+  (c-name "matewnck_tasklist_set_icon_loader")
+  (return-type "none")
+  (parameters
+    '("MatewnckLoadIconFunction" "load_icon_func")
+    '("void*" "data")
+    '("GDestroyNotify" "free_data_func")
+  )
+)
+
+
+
+;; From /usr/include/libmatewnck/libmatewnck/util.h
+
+(define-function set_client_type
+  (c-name "matewnck_set_client_type")
+  (return-type "none")
+  (parameters
+    '("MatewnckClientType" "ewmh_sourceindication_client_type")
+  ))
+
+(define-function gtk_window_set_dock_type
+  (c-name "matewnck_gtk_window_set_dock_type")
+  (return-type "none")
+  (parameters
+    '("GtkWindow*" "window")
+  )
+)
+
+(define-function xid_read_resource_usage
+  (c-name "matewnck_xid_read_resource_usage")
+  (return-type "none")
+  (parameters
+    '("GdkDisplay*" "gdk_display")
+    '("unsigned-long" "xid")
+    '("MatewnckResourceUsage*" "usage")
+  )
+)
+
+(define-function pid_read_resource_usage
+  (c-name "matewnck_pid_read_resource_usage")
+  (return-type "none")
+  (parameters
+    '("GdkDisplay*" "gdk_display")
+    '("unsigned-long" "pid")
+    '("MatewnckResourceUsage*" "usage")
+  )
+)
+
+
+
+;; From /usr/include/libmatewnck/libmatewnck/window-action-menu.h
+
+(define-function create_window_action_menu
+  (c-name "matewnck_create_window_action_menu")
+  (return-type "GtkWidget*")
+  (parameters
+    '("MatewnckWindow*" "window")
+  )
+)
+
+
+
+;; From /usr/include/libmatewnck/libmatewnck/window.h
+
+(define-function matewnck_window_get_type
+  (c-name "matewnck_window_get_type")
+  (return-type "GType")
+)
+
+(define-function window_get
+  (c-name "matewnck_window_get")
+  (return-type "MatewnckWindow*")
+  (parameters
+    '("gulong" "xwindow")
+  )
+)
+
+(define-method get_screen
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_screen")
+  (return-type "MatewnckScreen*")
+)
+
+(define-method has_name
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_has_name")
+  (return-type "gboolean")
+)
+
+(define-method get_name
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_name")
+  (return-type "const-char*")
+)
+
+(define-method has_icon_name
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_has_icon_name")
+  (return-type "gboolean")
+)
+
+(define-method get_icon_name
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_icon_name")
+  (return-type "const-char*")
+)
+
+(define-method get_application
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_application")
+  (return-type "MatewnckApplication*")
+)
+
+(define-method get_transient
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_transient")
+  (return-type "MatewnckWindow*")
+)
+
+(define-method get_group_leader
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_group_leader")
+  (return-type "gulong")
+)
+
+(define-method get_xid
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_xid")
+  (return-type "gulong")
+)
+
+(define-method get_class_group
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_class_group")
+  (return-type "MatewnckClassGroup*")
+)
+
+(define-method get_session_id
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_session_id")
+  (return-type "const-char*")
+)
+
+(define-method get_session_id_utf8
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_session_id_utf8")
+  (return-type "const-char*")
+)
+
+(define-method get_pid
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_pid")
+  (return-type "int")
+)
+
+(define-method get_sort_order
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_sort_order")
+  (return-type "gint")
+)
+
+(define-method set_sort_order
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_set_sort_order")
+  (return-type "none")
+  (parameters
+    '("gint" "order")
+  )
+)
+
+(define-method get_window_type
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_window_type")
+  (return-type "MatewnckWindowType")
+)
+
+(define-method set_window_type
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_set_window_type")
+  (return-type "none")
+  (parameters
+    '("MatewnckWindowType" "wintype")
+  )
+)
+
+(define-method is_minimized
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_minimized")
+  (return-type "gboolean")
+)
+
+(define-method is_maximized_horizontally
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_maximized_horizontally")
+  (return-type "gboolean")
+)
+
+(define-method is_maximized_vertically
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_maximized_vertically")
+  (return-type "gboolean")
+)
+
+(define-method is_maximized
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_maximized")
+  (return-type "gboolean")
+)
+
+(define-method is_shaded
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_shaded")
+  (return-type "gboolean")
+)
+
+(define-method is_above
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_above")
+  (return-type "gboolean")
+)
+
+(define-method is_below
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_below")
+  (return-type "gboolean")
+)
+
+(define-method is_skip_pager
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_skip_pager")
+  (return-type "gboolean")
+)
+
+(define-method is_skip_tasklist
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_skip_tasklist")
+  (return-type "gboolean")
+)
+
+(define-method is_fullscreen
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_fullscreen")
+  (return-type "gboolean")
+)
+
+(define-method is_sticky
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_sticky")
+  (return-type "gboolean")
+)
+
+(define-method needs_attention
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_needs_attention")
+  (return-type "gboolean")
+)
+
+(define-method or_transient_needs_attention
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_or_transient_needs_attention")
+  (return-type "gboolean")
+)
+
+(define-method set_skip_pager
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_set_skip_pager")
+  (return-type "none")
+  (parameters
+    '("gboolean" "skip")
+  )
+)
+
+(define-method set_skip_tasklist
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_set_skip_tasklist")
+  (return-type "none")
+  (parameters
+    '("gboolean" "skip")
+  )
+)
+
+(define-method set_fullscreen
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_set_fullscreen")
+  (return-type "none")
+  (parameters
+    '("gboolean" "fullscreen")
+  )
+)
+
+(define-method close
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_close")
+  (return-type "none")
+  (parameters
+    '("guint32" "timestamp")
+  )
+)
+
+(define-method minimize
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_minimize")
+  (return-type "none")
+)
+
+(define-method unminimize
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_unminimize")
+  (return-type "none")
+  (parameters
+    '("guint32" "timestamp")
+  )
+)
+
+(define-method maximize
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_maximize")
+  (return-type "none")
+)
+
+(define-method unmaximize
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_unmaximize")
+  (return-type "none")
+)
+
+(define-method maximize_horizontally
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_maximize_horizontally")
+  (return-type "none")
+)
+
+(define-method unmaximize_horizontally
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_unmaximize_horizontally")
+  (return-type "none")
+)
+
+(define-method maximize_vertically
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_maximize_vertically")
+  (return-type "none")
+)
+
+(define-method unmaximize_vertically
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_unmaximize_vertically")
+  (return-type "none")
+)
+
+(define-method shade
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_shade")
+  (return-type "none")
+)
+
+(define-method unshade
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_unshade")
+  (return-type "none")
+)
+
+(define-method make_above
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_make_above")
+  (return-type "none")
+)
+
+(define-method unmake_above
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_unmake_above")
+  (return-type "none")
+)
+
+(define-method make_below
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_make_below")
+  (return-type "none")
+)
+
+(define-method unmake_below
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_unmake_below")
+  (return-type "none")
+)
+
+(define-method stick
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_stick")
+  (return-type "none")
+)
+
+(define-method unstick
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_unstick")
+  (return-type "none")
+)
+
+(define-method keyboard_move
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_keyboard_move")
+  (return-type "none")
+)
+
+(define-method keyboard_size
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_keyboard_size")
+  (return-type "none")
+)
+
+(define-method get_workspace
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_workspace")
+  (return-type "MatewnckWorkspace*")
+)
+
+(define-method move_to_workspace
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_move_to_workspace")
+  (return-type "none")
+  (parameters
+    '("MatewnckWorkspace*" "space")
+  )
+)
+
+(define-method is_pinned
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_pinned")
+  (return-type "gboolean")
+)
+
+(define-method pin
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_pin")
+  (return-type "none")
+)
+
+(define-method unpin
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_unpin")
+  (return-type "none")
+)
+
+(define-method activate
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_activate")
+  (return-type "none")
+  (parameters
+    '("guint32" "timestamp")
+  )
+)
+
+(define-method is_active
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_active")
+  (return-type "gboolean")
+)
+
+(define-method is_most_recently_activated
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_most_recently_activated")
+  (return-type "gboolean")
+)
+
+(define-method activate_transient
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_activate_transient")
+  (return-type "none")
+  (parameters
+    '("guint32" "timestamp")
+  )
+)
+
+(define-method transient_is_most_recently_activated
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_transient_is_most_recently_activated")
+  (return-type "gboolean")
+)
+
+(define-method get_icon
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_icon")
+  (return-type "GdkPixbuf*")
+)
+
+(define-method get_mini_icon
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_mini_icon")
+  (return-type "GdkPixbuf*")
+)
+
+(define-method get_icon_is_fallback
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_icon_is_fallback")
+  (return-type "gboolean")
+)
+
+(define-method set_icon_geometry
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_set_icon_geometry")
+  (return-type "none")
+  (parameters
+    '("int" "x")
+    '("int" "y")
+    '("int" "width")
+    '("int" "height")
+  )
+)
+
+(define-method get_actions
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_actions")
+  (return-type "MatewnckWindowActions")
+)
+
+(define-method get_state
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_state")
+  (return-type "MatewnckWindowState")
+)
+
+(define-method get_client_window_geometry
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_client_window_geometry")
+  (return-type "none")
+  (parameters
+    '("int*" "xp")
+    '("int*" "yp")
+    '("int*" "widthp")
+    '("int*" "heightp")
+  )
+)
+
+(define-method get_geometry
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_get_geometry")
+  (return-type "none")
+  (parameters
+    '("int*" "xp")
+    '("int*" "yp")
+    '("int*" "widthp")
+    '("int*" "heightp")
+  )
+)
+
+(define-method set_geometry
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_set_geometry")
+  (return-type "none")
+  (parameters
+    '("MatewnckWindowGravity" "gravity")
+    '("MatewnckWindowMoveResizeMask" "geometry_mask")
+    '("int" "x")
+    '("int" "y")
+    '("int" "width")
+    '("int" "height")
+  )
+)
+
+(define-method is_visible_on_workspace
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_visible_on_workspace")
+  (return-type "gboolean")
+  (parameters
+    '("MatewnckWorkspace*" "workspace")
+  )
+)
+
+(define-method is_on_workspace
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_on_workspace")
+  (return-type "gboolean")
+  (parameters
+    '("MatewnckWorkspace*" "workspace")
+  )
+)
+
+(define-method is_in_viewport
+  (of-object "MatewnckWindow")
+  (c-name "matewnck_window_is_in_viewport")
+  (return-type "gboolean")
+  (parameters
+    '("MatewnckWorkspace*" "workspace")
+  )
+)
+
+
+
+;; From /usr/include/libmatewnck/libmatewnck/matewnck-enum-types.h
+
+(define-function matewnck_pager_display_mode_get_type
+  (c-name "matewnck_pager_display_mode_get_type")
+  (return-type "GType")
+)
+
+(define-function matewnck_motion_direction_get_type
+  (c-name "matewnck_motion_direction_get_type")
+  (return-type "GType")
+)
+
+(define-function matewnck_tasklist_grouping_type_get_type
+  (c-name "matewnck_tasklist_grouping_type_get_type")
+  (return-type "GType")
+)
+
+(define-function matewnck_client_type_get_type
+  (c-name "matewnck_client_type_get_type")
+  (return-type "GType")
+)
+
+(define-function matewnck_window_state_get_type
+  (c-name "matewnck_window_state_get_type")
+  (return-type "GType")
+)
+
+(define-function matewnck_window_actions_get_type
+  (c-name "matewnck_window_actions_get_type")
+  (return-type "GType")
+)
+
+(define-function matewnck_window_type_get_type
+  (c-name "matewnck_window_type_get_type")
+  (return-type "GType")
+)
+
+
+(define-function matewnck_window_gravity_get_type
+  (c-name "matewnck_window_gravity_get_type")
+  (return-type "GType")
+)
+
+(define-function matewnck_window_move_resize_mask_get_type
+  (c-name "matewnck_window_move_resize_mask_get_type")
+  (return-type "GType")
+)
+
+
+;; From /usr/include/libmatewnck/libmatewnck/workspace.h
+
+(define-function matewnck_workspace_get_type
+  (c-name "matewnck_workspace_get_type")
+  (return-type "GType")
+)
+
+(define-method get_number
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_number")
+  (return-type "int")
+)
+
+(define-method get_name
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_name")
+  (return-type "const-char*")
+)
+
+(define-method change_name
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_change_name")
+  (return-type "none")
+  (parameters
+    '("const-char*" "name")
+  )
+)
+
+(define-method get_screen
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_screen")
+  (return-type "MatewnckScreen*")
+)
+
+(define-method activate
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_activate")
+  (return-type "none")
+  (parameters
+    '("guint32" "timestamp")
+  )
+)
+
+(define-method get_width
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_width")
+  (return-type "int")
+)
+
+(define-method get_height
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_height")
+  (return-type "int")
+)
+
+(define-method get_viewport_x
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_viewport_x")
+  (return-type "int")
+)
+
+(define-method get_viewport_y
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_viewport_y")
+  (return-type "int")
+)
+
+(define-method is_virtual
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_is_virtual")
+  (return-type "gboolean")
+)
+
+
+(define-method get_layout_row
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_layout_row")
+  (return-type "int")
+)
+
+(define-method get_layout_column
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_layout_column")
+  (return-type "int")
+)
+
+(define-method get_neighbor
+  (of-object "MatewnckWorkspace")
+  (c-name "matewnck_workspace_get_neighbor")
+  (return-type "MatewnckWorkspace*")
+  (parameters
+    '("MatewnckMotionDirection" "direction")
+  )
+)
+
+
+
+;; From selector.h
+
+(define-function selector_new
+  (c-name "matewnck_selector_new")
+  (is-constructor-of "MatewnckSelector")
+  (return-type "GtkWidget*")
+)
+
+(define-function selector_get_type
+  (c-name "matewnck_selector_get_type")
+  (return-type "GType")
+)
+

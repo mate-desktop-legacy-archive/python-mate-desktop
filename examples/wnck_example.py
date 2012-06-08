@@ -1,9 +1,9 @@
 import gtk
-import wnck
+import matewnck
 
 def main():
-    screen = wnck.screen_get_default()
-    # Process pending gtk+ events so that wnck can find out about existing windows.
+    screen = matewnck.screen_get_default()
+    # Process pending gtk+ events so that matewnck can find out about existing windows.
     while gtk.events_pending():
         gtk.main_iteration()
     for window in screen.get_windows():

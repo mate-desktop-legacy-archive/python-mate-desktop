@@ -17,8 +17,8 @@ if BUILD_GTKSOURCEVIEW
   SUBDIRS += gtksourceview
 endif
 
-if BUILD_WNCK
-  SUBDIRS += wnck
+if BUILD_MATEWNCK
+  SUBDIRS += matewnck
 endif
 
 if BUILD_TOTEM_PLPARSER
@@ -114,7 +114,7 @@ EXTRA_DIST = \
   examples/keyring.py \
   examples/keyring-async.py \
   examples/rsvg/rsvg-cairo.py \
-  examples/wnck_example.py \
+  examples/matewnck_example.py \
   examples/braseromedia/drive_selection.py \
   examples/braseroburn/write-audio-video.py \
   examples/braseroburn/write-image.py \
