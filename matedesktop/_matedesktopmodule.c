@@ -19,10 +19,6 @@ init_matedesktop(void)
     PyObject *m, *d;
 	
     init_pygobject ();
-	if (PyImport_ImportModule("matevfs") == NULL) {
-        PyErr_SetString(PyExc_ImportError, "could not import matevfs");
-        return;
-    }
     
     m = Py_InitModule ("_matedesktop", py_matedesktop_functions);
     d = PyModule_GetDict (m);
