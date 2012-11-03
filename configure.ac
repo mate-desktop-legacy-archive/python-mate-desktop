@@ -367,7 +367,7 @@ AM_CONDITIONAL(BUILD_BUGBUDDY, $build_bugbuddy)
 dnl should we build the atril module
 AC_ARG_BINDING([atril],[YES])
 if $build_atril; then
-    PKG_CHECK_MODULES(ATRIL, [atril-document-2.32 atril-view-2.32],
+    PKG_CHECK_MODULES(ATRIL, [atril-document-1.5.0 atril-view-1.5.0],
       build_atril=true,
       build_atril=false)
     if test -n "$export_dynamic"; then
