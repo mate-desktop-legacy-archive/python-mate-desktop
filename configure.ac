@@ -22,7 +22,6 @@ m4_define(matewnck_required_version,              1.3.0)
 m4_define(libcaja_burn_required_version,  1.1.0)
 m4_define(mateconf_required_version,             1.1.0)
 m4_define(marco_required_version,          1.1.0)
-m4_define(rsvg_required_version,              2.13.93)
 m4_define(matekeyring_required_version,      1.1.0)
 m4_define(matedesktop_required_version,      1.1.0)
 
@@ -127,7 +126,7 @@ AC_ARG_ENABLE([gtk-doc],
 AM_CONDITIONAL(BUILD_DOCS, [test "$enable_gtk_doc" = "yes"])
 
 dnl default bindings to build:
-default_bindings_on="applet mateprint mateprintui matewnck cajaburn rsvg matekeyring matedesktop bugbuddy marco atril"
+default_bindings_on="applet mateprint mateprintui matewnck cajaburn matekeyring matedesktop bugbuddy marco atril"
 default_bindings_off="marco"
 default_bindings_all="$default_bindings_on $default_bindings_off"
 
@@ -233,21 +232,6 @@ if test -n "$export_dynamic"; then
   CAJABURN_LIBS=`echo $CAJABURN_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
-dnl should we build the rsvg module?
-AC_ARG_BINDING([rsvg],[YES])
-if $build_rsvg; then
-	PKG_CHECK_MODULES(RSVG, [librsvg-2.0 >= rsvg_required_version
-				 pycairo
-				 pygtk-2.0 >= pygtk_required_version],
-	  build_rsvg=true,
-	  build_rsvg=false)
-fi
-AM_CONDITIONAL(BUILD_RSVG, $build_rsvg)
-if test -n "$export_dynamic"; then
-  RSVG_LIBS=`echo $RSVG_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-
 dnl should we build the marco module
 AC_ARG_BINDING([marco],[NO])
 if $build_marco; then
@@ -332,7 +316,6 @@ AC_CONFIG_FILES(
   matewnck/Makefile
   cajaburn/Makefile
   marco/Makefile
-  rsvg/Makefile
   matekeyring/Makefile
   matedesktop/Makefile
   atril/Makefile
@@ -353,7 +336,6 @@ $build_mateprintui      && echo     mateprint.ui
 $build_matewnck              && echo     matewnck
 $build_cajaburn      && echo     cajaburn
 $build_marco          && echo     marco
-$build_rsvg              && echo     rsvg
 $build_matekeyring      && echo     matekeyring
 $build_matedesktop      && echo     matedesktop
 $build_bugbuddy          && echo     bugbuddy
@@ -368,7 +350,6 @@ $build_mateprintui      || echo     mateprint.ui
 $build_matewnck              || echo     matewnck
 $build_cajaburn      || echo     cajaburn
 $build_marco          || echo     marco
-$build_rsvg              || echo     rsvg
 $build_matekeyring      || echo     matekeyring
 $build_matedesktop      || echo     matedesktop
 $build_bugbuddy          || echo     bugbuddy

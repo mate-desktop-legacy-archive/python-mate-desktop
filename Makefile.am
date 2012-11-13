@@ -25,10 +25,6 @@ if BUILD_MARCO
   SUBDIRS += marco
 endif
 
-if BUILD_RSVG
-  SUBDIRS += rsvg
-endif
-
 if BUILD_MATEKEYRING
   SUBDIRS += matekeyring
 endif
@@ -83,7 +79,6 @@ EXTRA_DIST = \
   examples/cajaburn/write_iso.py \
   examples/keyring.py \
   examples/keyring-async.py \
-  examples/rsvg/rsvg-cairo.py \
   examples/matewnck_example.py
 
 

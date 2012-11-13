@@ -11,7 +11,6 @@ modules = [
     "matewnck",
     "cajaburn",
     "marco",
-    "rsvg",
     "matekeyring",
     "matedesktop",
     "atril",
