@@ -6,8 +6,6 @@ gobject.threads_init()
 
 modules = [
     "mateapplet",
-    "mateprint",
-    ("ui", "mateprint"),
     "matewnck",
     "cajaburn",
     "marco",

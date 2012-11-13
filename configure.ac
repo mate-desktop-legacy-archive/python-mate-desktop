@@ -16,8 +16,6 @@ m4_define(glib_required_version,              2.6.0)
 m4_define(gtk_required_version,               2.4.0)
 m4_define(mate_python_required_version,      1.1.0)
 m4_define(libmatepanelapplet_required_version,    1.1.0)
-m4_define(libmateprint_required_version,     1.1.0)
-m4_define(libmateprintui_required_version,   1.1.0)
 m4_define(matewnck_required_version,              1.3.0)
 m4_define(libcaja_burn_required_version,  1.1.0)
 m4_define(mateconf_required_version,             1.1.0)
@@ -126,7 +124,7 @@ AC_ARG_ENABLE([gtk-doc],
 AM_CONDITIONAL(BUILD_DOCS, [test "$enable_gtk_doc" = "yes"])
 
 dnl default bindings to build:
-default_bindings_on="applet mateprint mateprintui matewnck cajaburn matekeyring matedesktop bugbuddy marco atril"
+default_bindings_on="applet matewnck cajaburn matekeyring matedesktop bugbuddy marco atril"
 default_bindings_off="marco"
 default_bindings_all="$default_bindings_on $default_bindings_off"
 
@@ -161,50 +159,6 @@ AC_SUBST(LIBPANELAPPLET_LIBS)
 AM_CONDITIONAL(BUILD_APPLET, $build_applet)
 if test -n "$export_dynamic"; then
   LIBPANELAPPLET_LIBS=`echo $LIBPANELAPPLET_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-
-
-
-dnl should we build the mateprint module?
-AC_ARG_BINDING([mateprint],[YES])
-if $build_mateprint; then
-	PKG_CHECK_MODULES(LIBMATEPRINT, [libmateprint-2.2 >= libmateprint_required_version
-					 mate-python-2.0 >= mate_python_required_version],
-	  build_mateprint=true,
-	  build_mateprint=false)
-fi
-AC_SUBST(LIBMATEPRINT_CFLAGS)
-AC_SUBST(LIBMATEPRINT_LIBS)
-AM_CONDITIONAL(BUILD_MATEPRINT, $build_mateprint)
-if test -n "$export_dynamic"; then
-  LIBMATEPRINT_LIBS=`echo $LIBMATEPRINT_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-if [ $build_mateprint = true ]; then
-   AC_MSG_CHECKING([for libmateprint 2.8 API])
-   if $PKG_CONFIG --modversion "libmateprint-2.2 >= 1.1.0" > /dev/null 2>&1; then
-      AC_MSG_RESULT([found])
-      PYMATEPRINT_DEFS="-DHAVE_MATEPRINT28";
-   else
-      AC_MSG_RESULT([not found])
-   fi
-fi
-AC_SUBST(PYMATEPRINT_DEFS)
-
-dnl should we build the mateprint.ui module?
-AC_ARG_BINDING([mateprintui],[YES],[mateprint.ui])
-if $build_mateprintui; then
-	PKG_CHECK_MODULES(LIBMATEPRINTUI, [libmateprintui-2.2 >= libmateprintui_required_version,
-					   mate-python-2.0 >= mate_python_required_version],
-	  build_mateprintui=true,
-	  build_mateprintui=false)
-fi
-AC_SUBST(LIBMATEPRINTUI_CFLAGS)
-AC_SUBST(LIBMATEPRINTUI_LIBS)
-AM_CONDITIONAL(BUILD_MATEPRINTUI, $build_mateprintui)
-if test -n "$export_dynamic"; then
-  LIBMATEPRINTUI_LIBS=`echo $LIBMATEPRINTUI_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
 dnl should we build the matewnck module
@@ -312,7 +266,6 @@ JH_ADD_CFLAG([-fno-strict-aliasing])
 AC_CONFIG_FILES(
   Makefile
   mateapplet/Makefile
-  mateprint/Makefile
   matewnck/Makefile
   cajaburn/Makefile
   marco/Makefile
@@ -322,8 +275,6 @@ AC_CONFIG_FILES(
   mate-python-desktop-2.0.pc
   tests/Makefile
   docs/Makefile
-  docs/mateprint/Makefile
-  docs/mateprintui/Makefile
 )
 AC_OUTPUT
 
@@ -331,8 +282,6 @@ echo
 echo "The following modules will be built:"
 echo
 $build_applet            && $have_pymatecorba && echo     mateapplet
-$build_mateprint        && echo     mateprint
-$build_mateprintui      && echo     mateprint.ui
 $build_matewnck              && echo     matewnck
 $build_cajaburn      && echo     cajaburn
 $build_marco          && echo     marco
@@ -345,8 +294,6 @@ echo
 echo "The following modules will NOT be built:"
 echo
 $build_applet            && $have_pymatecorba || echo     mateapplet
-$build_mateprint        || echo     mateprint
-$build_mateprintui      || echo     mateprint.ui
 $build_matewnck              || echo     matewnck
 $build_cajaburn      || echo     cajaburn
 $build_marco          || echo     marco

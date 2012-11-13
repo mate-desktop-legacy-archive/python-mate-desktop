@@ -5,10 +5,6 @@ if BUILD_DOCS
   SUBDIRS += docs
 endif
 
-if BUILD_MATEPRINT
-  SUBDIRS += mateprint
-endif
-
 if BUILD_APPLET
   SUBDIRS += mateapplet
 endif
@@ -60,20 +56,6 @@ EXTRA_DIST = \
   examples/applet/applet.py \
   examples/applet/MATE_PythonAppletSample.server \
   examples/applet/README \
-  examples/mateprint/test-print.py \
-  examples/mateprint/example_01.py \
-  examples/mateprint/example_02.py \
-  examples/mateprint/example_03.py \
-  examples/mateprint/example_04.py \
-  examples/mateprint/example_05.py \
-  examples/mateprint/example_06.py \
-  examples/mateprint/example_08.py \
-  examples/mateprint/example_09.py \
-  examples/mateprint/example_10.glade \
-  examples/mateprint/example_10.py \
-  examples/mateprint/example_11.py \
-  examples/mateprint/README \
-  examples/mateprint/sample-image.png \
   examples/cajaburn/blank_disc.py \
   examples/cajaburn/drive_selection.py \
   examples/cajaburn/write_iso.py \

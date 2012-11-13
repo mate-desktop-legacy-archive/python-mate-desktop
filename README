@@ -1,7 +1,6 @@
 This package contains a few python modules that used to live in mate-python-extras:
 
   - mateapplet
-  - mateprint, mateprint.ui
   - matewnck
   - cajaburn
   - marco
