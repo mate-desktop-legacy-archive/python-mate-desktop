@@ -8,7 +8,6 @@ modules = [
     "mateapplet",
     "mateprint",
     ("ui", "mateprint"),
-    "gtksourceview",
     "matewnck",
     "cajaburn",
     "marco",

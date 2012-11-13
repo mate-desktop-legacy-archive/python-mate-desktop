@@ -18,7 +18,6 @@ m4_define(mate_python_required_version,      1.1.0)
 m4_define(libmatepanelapplet_required_version,    1.1.0)
 m4_define(libmateprint_required_version,     1.1.0)
 m4_define(libmateprintui_required_version,   1.1.0)
-m4_define(gtksourceview_required_version,     1.1.90)
 m4_define(matewnck_required_version,              1.3.0)
 m4_define(libcaja_burn_required_version,  1.1.0)
 m4_define(mateconf_required_version,             1.1.0)
@@ -128,7 +127,7 @@ AC_ARG_ENABLE([gtk-doc],
 AM_CONDITIONAL(BUILD_DOCS, [test "$enable_gtk_doc" = "yes"])
 
 dnl default bindings to build:
-default_bindings_on="applet mateprint mateprintui gtksourceview matewnck cajaburn rsvg matekeyring matedesktop bugbuddy marco atril"
+default_bindings_on="applet mateprint mateprintui matewnck cajaburn rsvg matekeyring matedesktop bugbuddy marco atril"
 default_bindings_off="marco"
 default_bindings_all="$default_bindings_on $default_bindings_off"
 
@@ -208,19 +207,6 @@ AM_CONDITIONAL(BUILD_MATEPRINTUI, $build_mateprintui)
 if test -n "$export_dynamic"; then
   LIBMATEPRINTUI_LIBS=`echo $LIBMATEPRINTUI_LIBS | sed -e "s/$export_dynamic//"`
 fi
-
-dnl should we build the gtksourceview module?
-AC_ARG_BINDING([gtksourceview],[YES])
-if $build_gtksourceview; then
-	PKG_CHECK_MODULES(GTKSOURCEVIEW, gtksourceview-1.0 >= gtksourceview_required_version,
-	  build_gtksourceview=true,
-	  build_gtksourceview=false)
-fi
-AM_CONDITIONAL(BUILD_GTKSOURCEVIEW, $build_gtksourceview)
-if test -n "$export_dynamic"; then
-  GTKSOURCEVIEW_LIBS=`echo $GTKSOURCEVIEW_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
 
 dnl should we build the matewnck module
 AC_ARG_BINDING([matewnck],[YES])
@@ -343,7 +329,6 @@ AC_CONFIG_FILES(
   Makefile
   mateapplet/Makefile
   mateprint/Makefile
-  gtksourceview/Makefile
   matewnck/Makefile
   cajaburn/Makefile
   marco/Makefile
@@ -354,7 +339,6 @@ AC_CONFIG_FILES(
   mate-python-desktop-2.0.pc
   tests/Makefile
   docs/Makefile
-  docs/gtksourceview/Makefile
   docs/mateprint/Makefile
   docs/mateprintui/Makefile
 )
@@ -366,7 +350,6 @@ echo
 $build_applet            && $have_pymatecorba && echo     mateapplet
 $build_mateprint        && echo     mateprint
 $build_mateprintui      && echo     mateprint.ui
-$build_gtksourceview     && echo     gtksourceview
 $build_matewnck              && echo     matewnck
 $build_cajaburn      && echo     cajaburn
 $build_marco          && echo     marco
@@ -382,7 +365,6 @@ echo
 $build_applet            && $have_pymatecorba || echo     mateapplet
 $build_mateprint        || echo     mateprint
 $build_mateprintui      || echo     mateprint.ui
-$build_gtksourceview     || echo     gtksourceview
 $build_matewnck              || echo     matewnck
 $build_cajaburn      || echo     cajaburn
 $build_marco          || echo     marco

@@ -13,10 +13,6 @@ if BUILD_APPLET
   SUBDIRS += mateapplet
 endif
 
-if BUILD_GTKSOURCEVIEW
-  SUBDIRS += gtksourceview
-endif
-
 if BUILD_MATEWNCK
   SUBDIRS += matewnck
 endif
@@ -65,7 +61,6 @@ EXTRA_DIST = \
   COPYING.GPL COPYING.LGPL \
   mate-python-desktop-2.0.pc.in \
   ltihooks.py \
-  examples/gtksourceview/test-widget.py \
   examples/applet/applet.py \
   examples/applet/MATE_PythonAppletSample.server \
   examples/applet/README \
