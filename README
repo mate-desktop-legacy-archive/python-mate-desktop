@@ -4,10 +4,8 @@ This package contains a few python modules that used to live in mate-python-extr
   - mateprint, mateprint.ui
   - gtksourceview
   - matewnck
-  - totem.plparser
   - gtop
   - cajaburn
-  - mediaprofiles
   - marco
 
 Note: this branch requires a special branch of WAF: https://code.launchpad.net/~gjc/waf/cmd

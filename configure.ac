@@ -22,7 +22,6 @@ m4_define(gtksourceview_required_version,     1.1.90)
 m4_define(matewnck_required_version,              1.3.0)
 m4_define(libgtop_required_version,           2.13.0)
 m4_define(libcaja_burn_required_version,  1.1.0)
-m4_define(mediaprofiles_required_version,     2.10.0)
 m4_define(mateconf_required_version,             1.1.0)
 m4_define(marco_required_version,          1.1.0)
 m4_define(rsvg_required_version,              2.13.93)
@@ -130,7 +129,7 @@ AC_ARG_ENABLE([gtk-doc],
 AM_CONDITIONAL(BUILD_DOCS, [test "$enable_gtk_doc" = "yes"])
 
 dnl default bindings to build:
-default_bindings_on="applet mateprint mateprintui gtksourceview matewnck gtop cajaburn mediaprofiles rsvg matekeyring matedesktop bugbuddy marco atril"
+default_bindings_on="applet mateprint mateprintui gtksourceview matewnck gtop cajaburn rsvg matekeyring matedesktop bugbuddy marco atril"
 default_bindings_off="marco"
 default_bindings_all="$default_bindings_on $default_bindings_off"
 
@@ -261,20 +260,6 @@ if test -n "$export_dynamic"; then
   CAJABURN_LIBS=`echo $CAJABURN_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
-dnl should we build the mediaprofiles module?
-AC_ARG_BINDING([mediaprofiles],[YES])
-if $build_mediaprofiles; then
-	PKG_CHECK_MODULES(MEDIAPROFILES, [mate-media-profiles >= mediaprofiles_required_version
-				   pygtk-2.0 >= pygtk_required_version
-				   mateconf-2.0 >= mateconf_required_version],
-	  build_mediaprofiles=true,
-	  build_mediaprofiles=false)
-fi
-AM_CONDITIONAL(BUILD_MEDIAPROFILES, $build_mediaprofiles)
-if test -n "$export_dynamic"; then
-  MEDIAPROFILES_LIBS=`echo $MEDIAPROFILES_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
 dnl should we build the rsvg module?
 AC_ARG_BINDING([rsvg],[YES])
 if $build_rsvg; then
@@ -375,7 +360,6 @@ AC_CONFIG_FILES(
   matewnck/Makefile
   gtop/Makefile
   cajaburn/Makefile
-  mediaprofiles/Makefile
   marco/Makefile
   rsvg/Makefile
   matekeyring/Makefile
@@ -400,7 +384,6 @@ $build_gtksourceview     && echo     gtksourceview
 $build_matewnck              && echo     matewnck
 $build_gtop              && echo     gtop
 $build_cajaburn      && echo     cajaburn
-$build_mediaprofiles     && echo     mediaprofiles
 $build_marco          && echo     marco
 $build_rsvg              && echo     rsvg
 $build_matekeyring      && echo     matekeyring
@@ -418,7 +401,6 @@ $build_gtksourceview     || echo     gtksourceview
 $build_matewnck              || echo     matewnck
 $build_gtop              || echo     gtop
 $build_cajaburn      || echo     cajaburn
-$build_mediaprofiles     || echo     mediaprofiles
 $build_marco          || echo     marco
 $build_rsvg              || echo     rsvg
 $build_matekeyring      || echo     matekeyring

@@ -29,10 +29,6 @@ if BUILD_CAJABURN
   SUBDIRS += cajaburn
 endif
 
-if BUILD_MEDIAPROFILES
-  SUBDIRS += mediaprofiles
-endif
-
 if BUILD_MARCO
   SUBDIRS += marco
 endif
@@ -91,7 +87,6 @@ EXTRA_DIST = \
   examples/mateprint/example_11.py \
   examples/mateprint/README \
   examples/mateprint/sample-image.png \
-  examples/mediaprofiles/profiles.py \
   examples/cajaburn/blank_disc.py \
   examples/cajaburn/drive_selection.py \
   examples/cajaburn/write_iso.py \

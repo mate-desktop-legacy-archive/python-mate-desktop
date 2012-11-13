@@ -12,7 +12,6 @@ modules = [
     "matewnck",
     "gtop",
     "cajaburn",
-    "mediaprofiles",
     "marco",
     "rsvg",
     "matekeyring",
