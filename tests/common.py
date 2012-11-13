@@ -10,7 +10,6 @@ modules = [
     ("ui", "mateprint"),
     "gtksourceview",
     "matewnck",
-    ("plparser", "totem"),
     "gtop",
     "cajaburn",
     "mediaprofiles",

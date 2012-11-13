@@ -28,7 +28,6 @@ m4_define(marco_required_version,          1.1.0)
 m4_define(rsvg_required_version,              2.13.93)
 m4_define(matekeyring_required_version,      1.1.0)
 m4_define(matedesktop_required_version,      1.1.0)
-m4_define(totem_required_version,             1.4.0)
 
 AC_INIT(mate-python-desktop, mate_python_desktop_version,
         [http://www.mate-desktop.org/])
@@ -60,7 +59,7 @@ MATE_COMMON_INIT
 
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
-dnl when using libtool 2.x create libtool early, because it's used in configure
+dnl when using libtool 2.x create libtool early, because it is used in configure
 m4_ifdef([LT_OUTPUT], [LT_OUTPUT])
 
 
@@ -131,7 +130,7 @@ AC_ARG_ENABLE([gtk-doc],
 AM_CONDITIONAL(BUILD_DOCS, [test "$enable_gtk_doc" = "yes"])
 
 dnl default bindings to build:
-default_bindings_on="applet mateprint mateprintui gtksourceview matewnck totem_plparser gtop cajaburn mediaprofiles rsvg matekeyring matedesktop bugbuddy marco atril"
+default_bindings_on="applet mateprint mateprintui gtksourceview matewnck gtop cajaburn mediaprofiles rsvg matekeyring matedesktop bugbuddy marco atril"
 default_bindings_off="marco"
 default_bindings_all="$default_bindings_on $default_bindings_off"
 
@@ -235,20 +234,6 @@ fi
 AM_CONDITIONAL(BUILD_MATEWNCK, $build_matewnck)
 if test -n "$export_dynamic"; then
   MATEWNCK_LIBS=`echo $MATEWNCK_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-
-
-dnl should we build the totem.plparser module?
-AC_ARG_BINDING([totem_plparser],[YES],[totem.plparser])
-if $build_totem_plparser; then
-	PKG_CHECK_MODULES(TOTEM_PLPARSER, [totem-plparser >= totem_required_version  pygtk-2.0 >= pygtk_required_version],
-	  build_totem_plparser=true,
-	  build_totem_plparser=false)
-fi
-AM_CONDITIONAL(BUILD_TOTEM_PLPARSER, $build_totem_plparser)
-if test -n "$export_dynamic"; then
-  TOTEM_PLPARSER_LIBS=`echo $TOTEM_PLPARSER_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
 dnl should we build the gtop module?
@@ -388,7 +373,6 @@ AC_CONFIG_FILES(
   mateprint/Makefile
   gtksourceview/Makefile
   matewnck/Makefile
-  totem/Makefile
   gtop/Makefile
   cajaburn/Makefile
   mediaprofiles/Makefile
@@ -414,7 +398,6 @@ $build_mateprint        && echo     mateprint
 $build_mateprintui      && echo     mateprint.ui
 $build_gtksourceview     && echo     gtksourceview
 $build_matewnck              && echo     matewnck
-$build_totem_plparser    && echo     totem.plparser
 $build_gtop              && echo     gtop
 $build_cajaburn      && echo     cajaburn
 $build_mediaprofiles     && echo     mediaprofiles
@@ -433,7 +416,6 @@ $build_mateprint        || echo     mateprint
 $build_mateprintui      || echo     mateprint.ui
 $build_gtksourceview     || echo     gtksourceview
 $build_matewnck              || echo     matewnck
-$build_totem_plparser    || echo     totem.plparser
 $build_gtop              || echo     gtop
 $build_cajaburn      || echo     cajaburn
 $build_mediaprofiles     || echo     mediaprofiles

@@ -21,10 +21,6 @@ if BUILD_MATEWNCK
   SUBDIRS += matewnck
 endif
 
-if BUILD_TOTEM_PLPARSER
-  SUBDIRS += totem
-endif
-
 if BUILD_GTOP
   SUBDIRS += gtop
 endif
