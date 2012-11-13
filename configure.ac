@@ -20,7 +20,6 @@ m4_define(libmateprint_required_version,     1.1.0)
 m4_define(libmateprintui_required_version,   1.1.0)
 m4_define(gtksourceview_required_version,     1.1.90)
 m4_define(matewnck_required_version,              1.3.0)
-m4_define(libgtop_required_version,           2.13.0)
 m4_define(libcaja_burn_required_version,  1.1.0)
 m4_define(mateconf_required_version,             1.1.0)
 m4_define(marco_required_version,          1.1.0)
@@ -129,7 +128,7 @@ AC_ARG_ENABLE([gtk-doc],
 AM_CONDITIONAL(BUILD_DOCS, [test "$enable_gtk_doc" = "yes"])
 
 dnl default bindings to build:
-default_bindings_on="applet mateprint mateprintui gtksourceview matewnck gtop cajaburn rsvg matekeyring matedesktop bugbuddy marco atril"
+default_bindings_on="applet mateprint mateprintui gtksourceview matewnck cajaburn rsvg matekeyring matedesktop bugbuddy marco atril"
 default_bindings_off="marco"
 default_bindings_all="$default_bindings_on $default_bindings_off"
 
@@ -233,18 +232,6 @@ fi
 AM_CONDITIONAL(BUILD_MATEWNCK, $build_matewnck)
 if test -n "$export_dynamic"; then
   MATEWNCK_LIBS=`echo $MATEWNCK_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-dnl should we build the gtop module?
-AC_ARG_BINDING([gtop],[YES])
-if $build_gtop; then
-	PKG_CHECK_MODULES(GTOP, [libgtop-2.0 >= libgtop_required_version pygtk-2.0 >= pygtk_required_version],
-	  build_gtop=true,
-	  build_gtop=false)
-fi
-AM_CONDITIONAL(BUILD_GTOP, $build_gtop)
-if test -n "$export_dynamic"; then
-  GTOP_LIBS=`echo $GTOP_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
 dnl should we build the cajaburn module?
@@ -358,7 +345,6 @@ AC_CONFIG_FILES(
   mateprint/Makefile
   gtksourceview/Makefile
   matewnck/Makefile
-  gtop/Makefile
   cajaburn/Makefile
   marco/Makefile
   rsvg/Makefile
@@ -382,7 +368,6 @@ $build_mateprint        && echo     mateprint
 $build_mateprintui      && echo     mateprint.ui
 $build_gtksourceview     && echo     gtksourceview
 $build_matewnck              && echo     matewnck
-$build_gtop              && echo     gtop
 $build_cajaburn      && echo     cajaburn
 $build_marco          && echo     marco
 $build_rsvg              && echo     rsvg
@@ -399,7 +384,6 @@ $build_mateprint        || echo     mateprint
 $build_mateprintui      || echo     mateprint.ui
 $build_gtksourceview     || echo     gtksourceview
 $build_matewnck              || echo     matewnck
-$build_gtop              || echo     gtop
 $build_cajaburn      || echo     cajaburn
 $build_marco          || echo     marco
 $build_rsvg              || echo     rsvg

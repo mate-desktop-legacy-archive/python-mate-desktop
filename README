@@ -4,7 +4,6 @@ This package contains a few python modules that used to live in mate-python-extr
   - mateprint, mateprint.ui
   - gtksourceview
   - matewnck
-  - gtop
   - cajaburn
   - marco
 

@@ -10,7 +10,6 @@ modules = [
     ("ui", "mateprint"),
     "gtksourceview",
     "matewnck",
-    "gtop",
     "cajaburn",
     "marco",
     "rsvg",

@@ -21,10 +21,6 @@ if BUILD_MATEWNCK
   SUBDIRS += matewnck
 endif
 
-if BUILD_GTOP
-  SUBDIRS += gtop
-endif
-
 if BUILD_CAJABURN
   SUBDIRS += cajaburn
 endif
