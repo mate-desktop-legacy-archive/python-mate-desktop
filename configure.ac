@@ -14,11 +14,9 @@ m4_define(pygtk_required_micro_version, 3)
 m4_define(pygtk_required_version, pygtk_required_major_version.pygtk_required_minor_version.pygtk_required_micro_version)
 m4_define(glib_required_version,              2.6.0)
 m4_define(gtk_required_version,               2.4.0)
-m4_define(mate_python_required_version,      1.1.0)
 m4_define(libmatepanelapplet_required_version,    1.1.0)
 m4_define(matewnck_required_version,              1.3.0)
 m4_define(libcaja_burn_required_version,  1.1.0)
-m4_define(mateconf_required_version,             1.1.0)
 m4_define(marco_required_version,          1.1.0)
 m4_define(matekeyring_required_version,      1.1.0)
 m4_define(matedesktop_required_version,      1.1.0)
@@ -281,7 +279,7 @@ AC_OUTPUT
 echo
 echo "The following modules will be built:"
 echo
-$build_applet            && $have_pymatecorba && echo     mateapplet
+$build_applet            && echo     mateapplet
 $build_matewnck              && echo     matewnck
 $build_cajaburn      && echo     cajaburn
 $build_marco          && echo     marco
@@ -293,7 +291,7 @@ echo
 
 echo "The following modules will NOT be built:"
 echo
-$build_applet            && $have_pymatecorba || echo     mateapplet
+$build_applet            || echo     mateapplet
 $build_matewnck              || echo     matewnck
 $build_cajaburn      || echo     cajaburn
 $build_marco          || echo     marco
